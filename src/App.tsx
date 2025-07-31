@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AnimatePresence } from 'framer-motion'
 
@@ -34,7 +34,8 @@ const App: React.FC = () => {
             <Header />
             <AnimatePresence mode="wait">
               <Routes>
-                <Route path="/" element={<CleanTimer />} />
+                <Route path="/" element={<Navigate to="/timer" replace />} />
+                <Route path="/timer" element={<CleanTimer />} />
                 <Route path="/about" element={<About />} />
               </Routes>
             </AnimatePresence>

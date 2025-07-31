@@ -118,7 +118,7 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
 
   const navItems = [
-    { path: '/', label: 'Timer', icon: '🍅' },
+    { path: '/timer', label: 'Timer', icon: '🍅' },
     { path: '/about', label: 'About', icon: 'ℹ️' },
   ]
 
@@ -129,7 +129,7 @@ const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Logo to="/">
+        <Logo to="/timer">
           🍅 PausePad
         </Logo>
 
