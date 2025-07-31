@@ -29,7 +29,7 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <GlobalStyles />
-        <Router>
+        <Router basename="/pausepad">
           <div className="app">
             <Header />
             <AnimatePresence mode="wait">
