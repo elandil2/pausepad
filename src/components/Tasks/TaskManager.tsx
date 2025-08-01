@@ -7,6 +7,10 @@ import Button from '../UI/Button'
 const TaskContainer = styled(GlassCard)`
   max-width: 400px;
   width: 100%;
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `
 
 const TaskHeader = styled.h3`
@@ -20,6 +24,11 @@ const TaskInputWrapper = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.sm};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `
 
 const TaskInput = styled.input`
@@ -32,6 +41,7 @@ const TaskInput = styled.input`
   font-size: ${({ theme }) => theme.fontSizes.base};
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  min-height: 44px;
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.6);
@@ -42,11 +52,20 @@ const TaskInput = styled.input`
     background: rgba(255, 255, 255, 0.15);
     border-color: ${({ theme }) => theme.colors.accent.primary};
   }
+  
+  @media (max-width: 480px) {
+    width: 100%;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
 `
 
 const AddButton = styled(Button)`
   border-radius: 50px;
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
+  
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `
 
 const TaskList = styled.div`
@@ -86,6 +105,14 @@ const TaskItem = styled(motion.div)<{ $completed: boolean }>`
     background: rgba(255, 255, 255, 0.1);
     transform: translateX(5px);
   }
+  
+  @media (max-width: 480px) {
+    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+    
+    &:hover {
+      transform: none;
+    }
+  }
 `
 
 const TaskText = styled.span<{ $completed: boolean }>`
@@ -115,6 +142,25 @@ const TaskButton = styled.button`
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.1);
+  }
+  
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+  }
+  
+  @media (hover: none) and (pointer: coarse) {
+    min-width: 44px;
+    min-height: 44px;
+    
+    &:hover {
+      transform: none;
+    }
+    
+    &:active {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(0.95);
+    }
   }
 `
 

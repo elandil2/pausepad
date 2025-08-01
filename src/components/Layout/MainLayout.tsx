@@ -12,6 +12,20 @@ const MainContent = styled.main`
   position: relative;
   z-index: 2;
   padding-top: 80px; /* Account for fixed header */
+  padding-left: ${({ theme }) => theme.spacing.md};
+  padding-right: ${({ theme }) => theme.spacing.md};
+  
+  @media (max-width: 768px) {
+    padding-top: 70px;
+    padding-left: ${({ theme }) => theme.spacing.sm};
+    padding-right: ${({ theme }) => theme.spacing.sm};
+  }
+  
+  @media (max-width: 480px) {
+    padding-top: 65px;
+    padding-left: ${({ theme }) => theme.spacing.xs};
+    padding-right: ${({ theme }) => theme.spacing.xs};
+  }
 `
 
 interface MainLayoutProps {

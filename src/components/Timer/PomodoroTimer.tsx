@@ -12,13 +12,28 @@ const TimerContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.xl};
   max-width: 500px;
   margin: 0 auto;
+  padding: 0 ${({ theme }) => theme.spacing.md};
+  
+  @media (max-width: 768px) {
+    gap: ${({ theme }) => theme.spacing.lg};
+    padding: 0 ${({ theme }) => theme.spacing.sm};
+  }
 `
 
 const TimerDisplay = styled(GlassCard)`
   text-align: center;
-  min-width: 300px;
+  width: 100%;
+  max-width: 400px;
   position: relative;
   overflow: hidden;
+  
+  @media (max-width: 768px) {
+    max-width: 320px;
+  }
+  
+  @media (max-width: 480px) {
+    max-width: 280px;
+  }
 `
 
 const ModeIndicator = styled.div<{ $mode: string }>`
@@ -44,15 +59,20 @@ const ModeIndicator = styled.div<{ $mode: string }>`
 `
 
 const TimeDisplay = styled(motion.div)`
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.text.primary};
   font-family: ${({ theme }) => theme.fonts.mono};
   margin: ${({ theme }) => theme.spacing.lg} 0;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: 3rem;
+  @media (max-width: 768px) {
+    margin: ${({ theme }) => theme.spacing.md} 0;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: clamp(2rem, 10vw, 3rem);
+    margin: ${({ theme }) => theme.spacing.sm} 0;
   }
 `
 
@@ -61,9 +81,19 @@ const ProgressRing = styled.svg`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 280px;
-  height: 280px;
+  width: min(280px, 80vw);
+  height: min(280px, 80vw);
   z-index: -1;
+  
+  @media (max-width: 768px) {
+    width: min(240px, 75vw);
+    height: min(240px, 75vw);
+  }
+  
+  @media (max-width: 480px) {
+    width: min(200px, 70vw);
+    height: min(200px, 70vw);
+  }
 `
 
 const ProgressCircle = styled.circle<{ $progress: number; $mode: string }>`
@@ -130,12 +160,42 @@ const ControlsContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.md};
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    gap: ${({ theme }) => theme.spacing.sm};
+    
+    > * {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
 `
 
 const ModeSelector = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.sm};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  @media (max-width: 768px) {
+    gap: ${({ theme }) => theme.spacing.xs};
+    margin-bottom: ${({ theme }) => theme.spacing.md};
+  }
+  
+  @media (max-width: 480px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: ${({ theme }) => theme.spacing.xs};
+    width: 100%;
+  }
 `
 
 const ModeButton = styled(Button)<{ $active: boolean }>`

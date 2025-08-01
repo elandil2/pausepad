@@ -35,24 +35,44 @@ const StyledButton = styled(motion.button)<{
         return `
           padding: ${theme.spacing.sm} ${theme.spacing.md};
           font-size: ${theme.fontSizes.sm};
+          min-height: 36px;
         `
       case 'md':
         return `
           padding: ${theme.spacing.md} ${theme.spacing.lg};
           font-size: ${theme.fontSizes.base};
+          min-height: 44px;
         `
       case 'lg':
         return `
           padding: ${theme.spacing.lg} ${theme.spacing.xl};
           font-size: ${theme.fontSizes.lg};
+          min-height: 48px;
         `
       default:
         return `
           padding: ${theme.spacing.md} ${theme.spacing.lg};
           font-size: ${theme.fontSizes.base};
+          min-height: 44px;
         `
     }
   }}
+  
+  /* Mobile touch optimizations */
+  @media (max-width: 768px) {
+    ${({ $size }) => {
+      switch ($size) {
+        case 'sm':
+          return `min-height: 40px;`
+        case 'md':
+          return `min-height: 48px;`
+        case 'lg':
+          return `min-height: 52px;`
+        default:
+          return `min-height: 48px;`
+      }
+    }}
+  }
   
   /* Variant styles */
   ${({ theme, $variant, $disabled, $loading }) => {
@@ -149,6 +169,18 @@ const StyledButton = styled(motion.button)<{
   
   @media (prefers-contrast: high) {
     border: 2px solid ${({ theme }) => theme.colors.text.primary};
+  }
+  
+  /* Touch device optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    &:hover:not(:disabled) {
+      transform: none;
+    }
+    
+    &:active:not(:disabled) {
+      transform: scale(0.95);
+      transition: transform 0.1s ease;
+    }
   }
 `
 

@@ -13,6 +13,10 @@ const HeaderContainer = styled.header`
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+  
+  @media (max-width: 768px) {
+    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+  }
 `
 
 const HeaderContent = styled.div`
@@ -34,14 +38,22 @@ const Logo = styled(Link)`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
+  
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.fontSizes.xl};
+  }
+  
+  @media (max-width: 480px) {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
 `
 
 const Navigation = styled.nav`
   display: flex;
   gap: ${({ theme }) => theme.spacing.lg};
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    gap: ${({ theme }) => theme.spacing.md};
+  @media (max-width: 768px) {
+    display: none;
   }
 `
 
@@ -85,16 +97,26 @@ const MobileMenuButton = styled.button`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   cursor: pointer;
   padding: ${({ theme }) => theme.spacing.sm};
+  min-height: 44px;
+  min-width: 44px;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  transition: ${({ theme }) => theme.transitions.fast};
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    display: block;
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `
 
 const MobileMenu = styled(motion.div)<{ $isOpen: boolean }>`
   display: none;
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: 768px) {
     display: ${({ $isOpen }) => $isOpen ? 'block' : 'none'};
     position: absolute;
     top: 100%;
@@ -103,7 +125,7 @@ const MobileMenu = styled(motion.div)<{ $isOpen: boolean }>`
     background: rgba(15, 15, 35, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: ${({ theme }) => theme.spacing.lg};
+    padding: ${({ theme }) => theme.spacing.md};
   }
 `
 
