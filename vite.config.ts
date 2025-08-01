@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/pausepad/', // Replace 'pausepad' with your GitHub repository name
+  base: '/', // Root path for Vercel deployment
   plugins: [
     react(),
     VitePWA({
