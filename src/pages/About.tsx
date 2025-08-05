@@ -175,7 +175,8 @@ const About: React.FC = () => {
             <p>
               <strong>The Pomodoro Technique</strong> is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. This technique helps improve focus and productivity while preventing burnout.
               <strong>I hope this helps for you.</strong>
-              If this saved you time or solved your problem, consider supporting my work:
+              </p>
+              <p>If this saved you time or solved your problem, consider supporting my work:
               
               <BuyMeACoffeeButton
                 href="https://buymeacoffee.com/saficengiz7"
