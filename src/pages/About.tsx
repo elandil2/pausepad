@@ -154,16 +154,8 @@ const About: React.FC = () => {
               <span>Progress Tracking</span>
             </FeatureItem>
             <FeatureItem>
-              <FeatureIcon>🌙</FeatureIcon>
-              <span>Theme Switching</span>
-            </FeatureItem>
-            <FeatureItem>
               <FeatureIcon>💾</FeatureIcon>
               <span>Local Data Persistence</span>
-            </FeatureItem>
-            <FeatureItem>
-              <FeatureIcon>📱</FeatureIcon>
-              <span>Responsive Design</span>
             </FeatureItem>
             <FeatureItem>
               <FeatureIcon>🔔</FeatureIcon>
@@ -173,11 +165,18 @@ const About: React.FC = () => {
           
           <AboutText>
             <p>
-              <strong>The Pomodoro Technique</strong> is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. This technique helps improve focus and productivity while preventing burnout.
+              <strong>The Pomodoro Technique</strong> is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks.
+            </p>
+            <p>
+              This technique helps improve focus and productivity while preventing burnout.
+            </p>
+            <p>
               <strong>I hope this helps for you.</strong>
-              </p>
-              <p>If this saved you time or solved your problem, consider supporting my work:
-              
+            </p>
+            <p>
+              If this saved you time or solved your problem, consider supporting my work:
+            </p>
+            <p>
               <BuyMeACoffeeButton
                 href="https://buymeacoffee.com/saficengiz7"
                 target="_blank"
