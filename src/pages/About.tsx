@@ -83,6 +83,24 @@ const FeatureIcon = styled.span`
   min-width: 30px;
 `
 
+const BuyMeACoffeeButton = styled.a`
+  display: inline-block;
+  margin-top: ${({ theme }) => theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.gradients.primary};
+  color: white;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+`
+
 const ContactInfo = styled.div`
   margin-top: ${({ theme }) => theme.spacing.xl};
   padding-top: ${({ theme }) => theme.spacing.lg};
@@ -156,11 +174,21 @@ const About: React.FC = () => {
           <AboutText>
             <p>
               <strong>The Pomodoro Technique</strong> is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. This technique helps improve focus and productivity while preventing burnout.
+              <strong>I hope this helps for you.</strong>
+              If this saved you time or solved your problem, consider supporting my work:
+              
+              <BuyMeACoffeeButton
+                href="https://buymeacoffee.com/saficengiz7"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ☕ Buy Me a Coffee
+              </BuyMeACoffeeButton>
             </p>
           </AboutText>
           
           <ContactInfo>
-            <p>Made with ❤️ for productivity enthusiasts</p>
+            <p>Made with ❤️</p>
             <p>Version 1.0.0 • Built with React & TypeScript</p>
           </ContactInfo>
         </AboutCard>
