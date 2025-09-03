@@ -82,4 +82,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://pausepad.com/blog/ar/pomodoro-arabic-guide</loc>
+    <lastmod>2024-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pausepad.com/blog/it/tecnica-pomodoro-completa</loc>
+    <lastmod>2024-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

@@ -183,6 +183,38 @@ const Blog: React.FC = () => {
           </p>
           <Link to="/blog/work-timer-better-focus">Read more →</Link>
         </BlogCard>
+
+        <BlogCard>
+          <BlogMeta>
+            <span>September 3, 2024</span>
+            <span>7 min read</span>
+          </BlogMeta>
+          <h2>تقنية البومودورو مفصلة - دليل شامل (Arabic)</h2>
+          <p>
+            تعلم تقنية البومودورو بالتفصيل. دليل شامل للدراسة والتركيز للطلاب في الدول العربية.
+          </p>
+          <p>
+            اكتشف كيفية استخدام تقنية البومودورو للتحضير للثانوية العامة والجامعة في الوطن العربي.
+          </p>
+          <Link to="/blog/ar/pomodoro-arabic-guide">اقرأ المزيد ←</Link>
+        </BlogCard>
+
+        <BlogCard>
+          <BlogMeta>
+            <span>September 3, 2024</span>
+            <span>7 min read</span>
+          </BlogMeta>
+          <h2>Tecnica del Pomodoro Completa - Guida per Studenti (Italian)</h2>
+          <p>
+            Impara la tecnica del Pomodoro completa. Metodo efficace per studiare e gestire il tempo
+            per la preparazione dell'Esame di Stato e università in Italia.
+          </p>
+          <p>
+            Scopri come utilizzare la tecnica del Pomodoro per prepararti all'esame di maturità
+            e ai test di ammissione universitaria.
+          </p>
+          <Link to="/blog/it/tecnica-pomodoro-completa">Leggi di più →</Link>
+        </BlogCard>
       </ContentWrapper>
     </BlogContainer>
     </>

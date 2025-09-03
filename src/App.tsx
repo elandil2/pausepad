@@ -21,6 +21,8 @@ import WorkTimerBetterFocus from './pages/blog/WorkTimerBetterFocus'
 // Import localized blog pages
 import PomodoroTeknigiAciklama from './pages/blog/tr/PomodoroTeknigiAciklama'
 import TecnicaPomodoroExplicada from './pages/blog/es/TecnicaPomodoroExplicada'
+import PomodoroArabic from './pages/blog/ar/pomodoro-arabic-guide'
+import PomodoroItalian from './pages/blog/it/tecnica-pomodoro-completa'
 
 // Import layout components
 import Header from './components/Layout/Header'
@@ -67,6 +69,8 @@ const App: React.FC = () => {
                   {/* Localized Blog Routes */}
                   <Route path="/blog/tr/pomodoro-teknigi-aciklama" element={<PomodoroTeknigiAciklama />} />
                   <Route path="/blog/es/tecnica-pomodoro-explicada" element={<TecnicaPomodoroExplicada />} />
+                  <Route path="/blog/ar/pomodoro-arabic-guide" element={<PomodoroArabic />} />
+                  <Route path="/blog/it/tecnica-pomodoro-completa" element={<PomodoroItalian />} />
                 </Routes>
               </AnimatePresence>
             </div>
