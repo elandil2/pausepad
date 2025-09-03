@@ -18,6 +18,10 @@ import TimeManagementPomodoro from './pages/blog/TimeManagementPomodoro'
 import ConcentrationTimerTechniques from './pages/blog/ConcentrationTimerTechniques'
 import WorkTimerBetterFocus from './pages/blog/WorkTimerBetterFocus'
 
+// Import localized blog pages
+import PomodoroTeknigiAciklama from './pages/blog/tr/PomodoroTeknigiAciklama'
+import TecnicaPomodoroExplicada from './pages/blog/es/TecnicaPomodoroExplicada'
+
 // Import layout components
 import Header from './components/Layout/Header'
 
@@ -59,6 +63,10 @@ const App: React.FC = () => {
                   <Route path="/blog/time-management-pomodoro" element={<TimeManagementPomodoro />} />
                   <Route path="/blog/concentration-timer-techniques" element={<ConcentrationTimerTechniques />} />
                   <Route path="/blog/work-timer-better-focus" element={<WorkTimerBetterFocus />} />
+  
+                  {/* Localized Blog Routes */}
+                  <Route path="/blog/tr/pomodoro-teknigi-aciklama" element={<PomodoroTeknigiAciklama />} />
+                  <Route path="/blog/es/tecnica-pomodoro-explicada" element={<TecnicaPomodoroExplicada />} />
                 </Routes>
               </AnimatePresence>
             </div>
