@@ -11,6 +11,22 @@ const TimerContainer = styled.div`
   max-width: 600px;
   margin: 0 auto;
   padding: ${({ theme }) => theme.spacing.xl};
+  width: 100%;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.spacing.lg};
+    gap: ${({ theme }) => theme.spacing.lg};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.spacing.md};
+    gap: ${({ theme }) => theme.spacing.md};
+  }
+
+  @media (max-width: 480px) {
+    padding: ${({ theme }) => theme.spacing.sm};
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `
 
 const ModeSelector = styled.div`
@@ -20,6 +36,18 @@ const ModeSelector = styled.div`
   padding: 4px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 2px;
+    border-radius: 8px;
+  }
 `
 
 const ModeTab = styled.button<{ $active: boolean }>`
@@ -32,15 +60,23 @@ const ModeTab = styled.button<{ $active: boolean }>`
   transition: all 0.2s ease;
   font-weight: ${({ $active }) => $active ? 600 : 400};
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  
+  white-space: nowrap;
+  flex-shrink: 0;
+
   &:hover {
     background: rgba(255, 255, 255, 0.15);
     color: ${({ theme }) => theme.colors.text.primary};
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 8px 16px;
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    min-width: 80px;
   }
 `
 
@@ -185,9 +221,16 @@ const ControlsContainer = styled.div`
   margin-top: ${({ theme }) => theme.spacing.lg};
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 100%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     gap: ${({ theme }) => theme.spacing.sm};
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    gap: ${({ theme }) => theme.spacing.xs};
   }
 `
 

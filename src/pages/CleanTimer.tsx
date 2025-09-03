@@ -13,15 +13,26 @@ const TimerContainer = styled(motion.div)`
   align-items: center;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing.lg};
-  padding-top: 120px;
+  padding-top: 80px;
   position: relative;
   overflow-y: auto;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    padding-top: 100px;
+    padding-top: 60px;
+    padding-bottom: ${({ theme }) => theme.spacing.xl};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.spacing.md};
+    padding-top: 50px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.spacing.sm};
+    padding-top: 40px;
   }
 `
 
@@ -32,10 +43,20 @@ const MainContent = styled.div`
   width: 100%;
   max-width: 1400px;
   gap: ${({ theme }) => theme.spacing.xl};
-  
+
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.lg};
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    gap: ${({ theme }) => theme.spacing.md};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    gap: ${({ theme }) => theme.spacing.sm};
   }
 `
 
