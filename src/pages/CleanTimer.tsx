@@ -4,21 +4,23 @@ import styled from 'styled-components'
 import CleanPomodoroTimer from '../components/Timer/CleanPomodoroTimer'
 import CleanTaskPanel from '../components/Tasks/CleanTaskPanel'
 import YouTubePlayer from '../components/Music/YouTubePlayer'
+import SEO from '../components/SEO'
 
 const TimerContainer = styled(motion.div)`
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing.lg};
   padding-top: 120px;
   position: relative;
   overflow-y: auto;
-  
+
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
     padding-top: 100px;
   }
 `
@@ -93,12 +95,18 @@ const CleanTimer: React.FC = () => {
   console.log('Completed tasks:', completedTasks)
 
   return (
-    <TimerContainer
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <>
+      <SEO
+        title="PausePad - Modern Pomodoro Timer"
+        description="Modern Pomodoro timer for focused studying, relaxing breaks, and chill work sessions. Boost productivity with timed focus intervals and integrated music."
+        canonical="/timer"
+      />
+      <TimerContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
       <BackgroundOverlay />
       
       <ContentWrapper>
@@ -117,6 +125,7 @@ const CleanTimer: React.FC = () => {
         <YouTubePlayer />
       </MusicPlayerWrapper>
     </TimerContainer>
+    </>
   )
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 import GlassCard from '../components/UI/GlassCard'
+import SEO from '../components/SEO'
 
 const AboutContainer = styled(motion.div)`
   min-height: 100vh;
@@ -112,12 +113,18 @@ const ContactInfo = styled.div`
 
 const About: React.FC = () => {
   return (
-    <AboutContainer
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
-    >
+    <>
+      <SEO
+        title="About PausePad - Modern Pomodoro Timer"
+        description="Learn about PausePad, a modern Pomodoro timer with glassmorphic design, task management, and music integration for enhanced productivity."
+        canonical="/about"
+      />
+      <AboutContainer
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+      >
       <ContentWrapper>
         <PageTitle>About PausePad</PageTitle>
         
@@ -194,6 +201,7 @@ const About: React.FC = () => {
         </AboutCard>
       </ContentWrapper>
     </AboutContainer>
+    </>
   )
 }
 

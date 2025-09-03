@@ -2,10 +2,13 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AnimatePresence } from 'framer-motion'
+import { HelmetProvider } from 'react-helmet-async'
 
 // Import pages
 import CleanTimer from './pages/CleanTimer'
 import About from './pages/About'
+import Blog from './pages/Blog'
+import Privacy from './pages/Privacy'
 
 // Import layout components
 import Header from './components/Layout/Header'
@@ -26,23 +29,27 @@ const queryClient = new QueryClient({
 
 const App: React.FC = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <GlobalStyles />
-        <Router>
-          <div className="app">
-            <Header />
-            <AnimatePresence mode="wait">
-              <Routes>
-                <Route path="/" element={<Navigate to="/timer" replace />} />
-                <Route path="/timer" element={<CleanTimer />} />
-                <Route path="/about" element={<About />} />
-              </Routes>
-            </AnimatePresence>
-          </div>
-        </Router>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <GlobalStyles />
+          <Router>
+            <div className="app">
+              <Header />
+              <AnimatePresence mode="wait">
+                <Routes>
+                  <Route path="/" element={<Navigate to="/timer" replace />} />
+                  <Route path="/timer" element={<CleanTimer />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                </Routes>
+              </AnimatePresence>
+            </div>
+          </Router>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   )
 }
 

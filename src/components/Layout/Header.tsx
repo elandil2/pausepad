@@ -142,6 +142,8 @@ const Header: React.FC = () => {
   const navItems = [
     { path: '/timer', label: 'Timer', icon: '🍅' },
     { path: '/about', label: 'About', icon: 'ℹ️' },
+    { path: '/blog', label: 'Blog', icon: '📝' },
+    { path: '/privacy', label: 'Privacy', icon: '🔒' },
   ]
 
   const toggleMobileMenu = () => {

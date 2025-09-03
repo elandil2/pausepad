@@ -150,7 +150,7 @@ const ControlButton = styled(motion.button)<{ $variant?: 'primary' | 'secondary'
   padding: 16px 32px;
   border: none;
   border-radius: 50px;
-  background: ${({ $variant }) => 
+  background: ${({ $variant }) =>
     $variant === 'primary' ? '#667eea' : 'rgba(255, 255, 255, 0.1)'};
   color: ${({ theme }) => theme.colors.text.primary};
   font-size: ${({ theme }) => theme.fontSizes.base};
@@ -158,17 +158,24 @@ const ControlButton = styled(motion.button)<{ $variant?: 'primary' | 'secondary'
   cursor: pointer;
   transition: all 0.2s ease;
   backdrop-filter: blur(10px);
-  border: 1px solid ${({ $variant }) => 
+  border: 1px solid ${({ $variant }) =>
     $variant === 'primary' ? '#667eea' : 'rgba(255, 255, 255, 0.2)'};
-  
+  min-width: 120px;
+
   &:hover {
-    background: ${({ $variant }) => 
+    background: ${({ $variant }) =>
       $variant === 'primary' ? '#5a6fd8' : 'rgba(255, 255, 255, 0.15)'};
     transform: translateY(-2px);
   }
-  
+
   &:active {
     transform: translateY(0);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 12px 20px;
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    min-width: 100px;
   }
 `
 
@@ -176,6 +183,12 @@ const ControlsContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.md};
   margin-top: ${({ theme }) => theme.spacing.lg};
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `
 
 interface CleanPomodoroTimerProps {
