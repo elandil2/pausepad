@@ -23,6 +23,10 @@ import PomodoroTeknigiAciklama from './pages/blog/tr/PomodoroTeknigiAciklama'
 import TecnicaPomodoroExplicada from './pages/blog/es/TecnicaPomodoroExplicada'
 import PomodoroArabic from './pages/blog/ar/pomodoro-arabic-guide'
 import PomodoroItalian from './pages/blog/it/tecnica-pomodoro-completa'
+import PomodoroChinese from './pages/blog/zh/pomodoro-technique-guide'
+import PomodoroHindi from './pages/blog/hi/pomodoro-ka-complete-guide'
+import PomodoroUrdu from './pages/blog/ur/pomodoro-technique-urdu-guide'
+import PomodoroRussian from './pages/blog/ru/pomodoro-tehnika-polnoe-rukovodstvo'
 
 // Import layout components
 import Header from './components/Layout/Header'
@@ -71,6 +75,10 @@ const App: React.FC = () => {
                   <Route path="/blog/es/tecnica-pomodoro-explicada" element={<TecnicaPomodoroExplicada />} />
                   <Route path="/blog/ar/pomodoro-arabic-guide" element={<PomodoroArabic />} />
                   <Route path="/blog/it/tecnica-pomodoro-completa" element={<PomodoroItalian />} />
+                  <Route path="/blog/zh/pomodoro-technique-guide" element={<PomodoroChinese />} />
+                  <Route path="/blog/hi/pomodoro-ka-complete-guide" element={<PomodoroHindi />} />
+                  <Route path="/blog/ur/pomodoro-technique-urdu-guide" element={<PomodoroUrdu />} />
+                  <Route path="/blog/ru/pomodoro-tehnika-polnoe-rukovodstvo" element={<PomodoroRussian />} />
                 </Routes>
               </AnimatePresence>
             </div>

@@ -215,6 +215,66 @@ const Blog: React.FC = () => {
           </p>
           <Link to="/blog/it/tecnica-pomodoro-completa">Leggi di più →</Link>
         </BlogCard>
+
+        <BlogCard>
+          <BlogMeta>
+            <span>September 3, 2024</span>
+            <span>7 min read</span>
+          </BlogMeta>
+          <h2>番茄工作法完全指南 - 高考时间管理 (Chinese)</h2>
+          <p>
+            番茄工作法完整教程。高效学习时间管理方法，专为高考、中考、考研学生设计。
+          </p>
+          <p>
+            了解如何使用番茄工作法为高考、中考和研究生入学考试做准备。
+          </p>
+          <Link to="/blog/zh/pomodoro-technique-guide">阅读更多 →</Link>
+        </BlogCard>
+
+        <BlogCard>
+          <BlogMeta>
+            <span>September 3, 2024</span>
+            <span>7 min read</span>
+          </BlogMeta>
+          <h2>Pomodoro तकनीक की पूरी गाइड - JEE NEET तैयारी (Hindi)</h2>
+          <p>
+            Pomodoro तकनीक की संपूर्ण मार्गदर्शिका। JEE, NEET, UPSC की तैयारी के लिए समय प्रबंधन का प्रभावी तरीका।
+          </p>
+          <p>
+            जानें कैसे भारतीय छात्र JEE, NEET और अन्य प्रतियोगी परीक्षाओं की तैयारी के लिए Pomodoro तकनीक का उपयोग कर सकते हैं।
+          </p>
+          <Link to="/blog/hi/pomodoro-ka-complete-guide">और पढ़ें →</Link>
+        </BlogCard>
+
+        <BlogCard>
+          <BlogMeta>
+            <span>September 3, 2024</span>
+            <span>7 min read</span>
+          </BlogMeta>
+          <h2>پوموڈورو تکنیک کی مکمل گائیڈ - ایم ڈی کیٹ کی تیاری (Urdu)</h2>
+          <p>
+            پوموڈورو تکنیک کی مکمل گائیڈ۔ ایم ڈی کیٹ، ای سی اے ٹی، سی ایس ایس کی تیاری کے لیے وقت کے انتظام کا مؤثر طریقہ۔
+          </p>
+          <p>
+            پاکستانی طلباء کے لیے خصوصی طور پر ڈیزائن کیا گیا - ایم ڈی کیٹ، ای سی اے ٹی اور دیگر امتحانات کی تیاری کے لیے۔
+          </p>
+          <Link to="/blog/ur/pomodoro-technique-urdu-guide">مزید پڑھیں ←</Link>
+        </BlogCard>
+
+        <BlogCard>
+          <BlogMeta>
+            <span>September 3, 2024</span>
+            <span>7 min read</span>
+          </BlogMeta>
+          <h2>Техника Помодоро Полное Руководство - Подготовка к ЕГЭ (Russian)</h2>
+          <p>
+            Полное руководство по технике Помодоро. Эффективный метод управления временем для подготовки к ЕГЭ, ОГЭ.
+          </p>
+          <p>
+            Узнайте, как использовать технику Помодоро для подготовки к ЕГЭ и поступлению в университеты России.
+          </p>
+          <Link to="/blog/ru/pomodoro-tehnika-polnoe-rukovodstvo">Читать далее →</Link>
+        </BlogCard>
       </ContentWrapper>
     </BlogContainer>
     </>
