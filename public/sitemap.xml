@@ -30,4 +30,42 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://pausepad.com/blog/pomodoro-technique-explained</loc>
+    <lastmod>2024-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pausepad.com/blog/best-study-timer-apps</loc>
+    <lastmod>2024-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pausepad.com/blog/focus-timer-productivity</loc>
+    <lastmod>2024-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pausepad.com/blog/time-management-pomodoro</loc>
+    <lastmod>2024-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pausepad.com/blog/concentration-timer-techniques</loc>
+    <lastmod>2024-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pausepad.com/blog/work-timer-better-focus</loc>
+    <lastmod>2024-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

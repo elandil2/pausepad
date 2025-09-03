@@ -10,6 +10,14 @@ import About from './pages/About'
 import Blog from './pages/Blog'
 import Privacy from './pages/Privacy'
 
+// Import blog pages
+import PomodoroTechniqueExplained from './pages/blog/PomodoroTechniqueExplained'
+import BestStudyTimerApps from './pages/blog/BestStudyTimerApps'
+import FocusTimerProductivity from './pages/blog/FocusTimerProductivity'
+import TimeManagementPomodoro from './pages/blog/TimeManagementPomodoro'
+import ConcentrationTimerTechniques from './pages/blog/ConcentrationTimerTechniques'
+import WorkTimerBetterFocus from './pages/blog/WorkTimerBetterFocus'
+
 // Import layout components
 import Header from './components/Layout/Header'
 
@@ -43,6 +51,14 @@ const App: React.FC = () => {
                   <Route path="/about" element={<About />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/privacy" element={<Privacy />} />
+  
+                  {/* Blog Routes */}
+                  <Route path="/blog/pomodoro-technique-explained" element={<PomodoroTechniqueExplained />} />
+                  <Route path="/blog/best-study-timer-apps" element={<BestStudyTimerApps />} />
+                  <Route path="/blog/focus-timer-productivity" element={<FocusTimerProductivity />} />
+                  <Route path="/blog/time-management-pomodoro" element={<TimeManagementPomodoro />} />
+                  <Route path="/blog/concentration-timer-techniques" element={<ConcentrationTimerTechniques />} />
+                  <Route path="/blog/work-timer-better-focus" element={<WorkTimerBetterFocus />} />
                 </Routes>
               </AnimatePresence>
             </div>
