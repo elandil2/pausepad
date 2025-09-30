@@ -1,8 +1,9 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AnimatePresence } from 'framer-motion'
 import { HelmetProvider } from 'react-helmet-async'
+import { initGA, trackPageView } from './utils/analytics'
 
 // Import pages
 import CleanTimer from './pages/CleanTimer'
@@ -45,13 +46,30 @@ const queryClient = new QueryClient({
   },
 })
 
+// Component to track page views
+const Analytics: React.FC = () => {
+  const location = useLocation()
+
+  useEffect(() => {
+    trackPageView(location.pathname + location.search)
+  }, [location])
+
+  return null
+}
+
 const App: React.FC = () => {
+  useEffect(() => {
+    // Initialize Google Analytics on mount
+    initGA()
+  }, [])
+
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <GlobalStyles />
           <Router>
+            <Analytics />
             <div className="app">
               <Header />
               <AnimatePresence mode="wait">
@@ -61,7 +79,7 @@ const App: React.FC = () => {
                   <Route path="/about" element={<About />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/privacy" element={<Privacy />} />
-  
+
                   {/* Blog Routes */}
                   <Route path="/blog/pomodoro-technique-explained" element={<PomodoroTechniqueExplained />} />
                   <Route path="/blog/best-study-timer-apps" element={<BestStudyTimerApps />} />
@@ -69,7 +87,7 @@ const App: React.FC = () => {
                   <Route path="/blog/time-management-pomodoro" element={<TimeManagementPomodoro />} />
                   <Route path="/blog/concentration-timer-techniques" element={<ConcentrationTimerTechniques />} />
                   <Route path="/blog/work-timer-better-focus" element={<WorkTimerBetterFocus />} />
-  
+
                   {/* Localized Blog Routes */}
                   <Route path="/blog/tr/pomodoro-teknigi-aciklama" element={<PomodoroTeknigiAciklama />} />
                   <Route path="/blog/es/tecnica-pomodoro-explicada" element={<TecnicaPomodoroExplicada />} />

@@ -1,121 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://pausepad.com/</loc>
-    <lastmod>2024-09-03</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.pausepad.com/</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://pausepad.com/timer</loc>
-    <lastmod>2024-09-03</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.pausepad.com/timer</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pausepad.com/about</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/about</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pausepad.com/blog</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pausepad.com/privacy</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/privacy</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
-  <!-- Blog Posts -->
+  <!-- English Blog Posts -->
   <url>
-    <loc>https://pausepad.com/blog/pomodoro-technique-explained</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/pomodoro-technique-explained</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pausepad.com/blog/pomodoro-technique-explained" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.pausepad.com/blog/tr/pomodoro-teknigi-aciklama" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.pausepad.com/blog/es/tecnica-pomodoro-explicada" />
   </url>
   <url>
-    <loc>https://pausepad.com/blog/best-study-timer-apps</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/best-study-timer-apps</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pausepad.com/blog/focus-timer-productivity</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/focus-timer-productivity</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pausepad.com/blog/time-management-pomodoro</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/time-management-pomodoro</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pausepad.com/blog/concentration-timer-techniques</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/concentration-timer-techniques</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pausepad.com/blog/work-timer-better-focus</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/work-timer-better-focus</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
   <!-- Localized Blog Posts -->
   <url>
-    <loc>https://pausepad.com/blog/tr/pomodoro-teknigi-aciklama</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/tr/pomodoro-teknigi-aciklama</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.pausepad.com/blog/tr/pomodoro-teknigi-aciklama" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pausepad.com/blog/pomodoro-technique-explained" />
   </url>
   <url>
-    <loc>https://pausepad.com/blog/es/tecnica-pomodoro-explicada</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/es/tecnica-pomodoro-explicada</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.pausepad.com/blog/es/tecnica-pomodoro-explicada" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pausepad.com/blog/pomodoro-technique-explained" />
   </url>
   <url>
-    <loc>https://pausepad.com/blog/ar/pomodoro-arabic-guide</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/ar/pomodoro-arabic-guide</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.pausepad.com/blog/ar/pomodoro-arabic-guide" />
   </url>
   <url>
-    <loc>https://pausepad.com/blog/it/tecnica-pomodoro-completa</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/it/tecnica-pomodoro-completa</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.pausepad.com/blog/it/tecnica-pomodoro-completa" />
   </url>
   <url>
-    <loc>https://pausepad.com/blog/zh/pomodoro-technique-guide</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/zh/pomodoro-technique-guide</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.pausepad.com/blog/zh/pomodoro-technique-guide" />
   </url>
   <url>
-    <loc>https://pausepad.com/blog/hi/pomodoro-ka-complete-guide</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/hi/pomodoro-ka-complete-guide</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.pausepad.com/blog/hi/pomodoro-ka-complete-guide" />
   </url>
   <url>
-    <loc>https://pausepad.com/blog/ur/pomodoro-technique-urdu-guide</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/ur/pomodoro-technique-urdu-guide</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ur" href="https://www.pausepad.com/blog/ur/pomodoro-technique-urdu-guide" />
   </url>
   <url>
-    <loc>https://pausepad.com/blog/ru/pomodoro-tehnika-polnoe-rukovodstvo</loc>
-    <lastmod>2024-09-03</lastmod>
+    <loc>https://www.pausepad.com/blog/ru/pomodoro-tehnika-polnoe-rukovodstvo</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.pausepad.com/blog/ru/pomodoro-tehnika-polnoe-rukovodstvo" />
   </url>
 </urlset>

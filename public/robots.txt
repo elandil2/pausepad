@@ -16,4 +16,4 @@ User-agent: Slurp
 Allow: /
 
 # Sitemap
-Sitemap: https://pausepad.com/sitemap.xml
+Sitemap: https://www.pausepad.com/sitemap.xml

@@ -62,6 +62,7 @@ const ModeTab = styled.button<{ $active: boolean }>`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   white-space: nowrap;
   flex-shrink: 0;
+  min-height: 44px;
 
   &:hover {
     background: rgba(255, 255, 255, 0.15);
@@ -74,9 +75,16 @@ const ModeTab = styled.button<{ $active: boolean }>`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: 8px 16px;
+    padding: 10px 14px;
     font-size: ${({ theme }) => theme.fontSizes.xs};
-    min-width: 80px;
+    min-width: 70px;
+    min-height: 44px;
+  }
+
+  @media (max-width: 400px) {
+    padding: 8px 10px;
+    font-size: 0.7rem;
+    min-width: 65px;
   }
 `
 
@@ -88,10 +96,20 @@ const TimerCircle = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    width: 250px;
-    height: 250px;
+    width: 260px;
+    height: 260px;
+  }
+
+  @media (max-width: 400px) {
+    width: 240px;
+    height: 240px;
+  }
+
+  @media (max-width: 360px) {
+    width: 220px;
+    height: 220px;
   }
 `
 
@@ -197,6 +215,7 @@ const ControlButton = styled(motion.button)<{ $variant?: 'primary' | 'secondary'
   border: 1px solid ${({ $variant }) =>
     $variant === 'primary' ? '#667eea' : 'rgba(255, 255, 255, 0.2)'};
   min-width: 120px;
+  min-height: 48px;
 
   &:hover {
     background: ${({ $variant }) =>
@@ -209,9 +228,17 @@ const ControlButton = styled(motion.button)<{ $variant?: 'primary' | 'secondary'
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 14px 24px;
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    min-width: 110px;
+    min-height: 48px;
+  }
+
+  @media (max-width: 400px) {
     padding: 12px 20px;
     font-size: ${({ theme }) => theme.fontSizes.sm};
     min-width: 100px;
+    min-height: 44px;
   }
 `
 
@@ -225,12 +252,15 @@ const ControlsContainer = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     gap: ${({ theme }) => theme.spacing.sm};
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 350px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 400px) {
     gap: ${({ theme }) => theme.spacing.xs};
+    max-width: 300px;
   }
 `
 

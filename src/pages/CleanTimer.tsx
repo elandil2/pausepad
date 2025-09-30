@@ -19,20 +19,28 @@ const TimerContainer = styled(motion.div)`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding-top: 60px;
-    padding-bottom: ${({ theme }) => theme.spacing.xl};
+    padding-top: 70px;
+    padding-bottom: ${({ theme }) => theme.spacing.lg};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.spacing.md};
-    padding-top: 50px;
+    padding: ${({ theme }) => theme.spacing.sm};
+    padding-top: 65px;
+    padding-bottom: ${({ theme }) => theme.spacing.md};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: ${({ theme }) => theme.spacing.sm};
-    padding-top: 40px;
+    padding: ${({ theme }) => theme.spacing.xs};
+    padding-top: 60px;
+    padding-bottom: 240px; /* Space for YouTube player */
+  }
+
+  @media (max-width: 400px) {
+    padding: 8px;
+    padding-top: 58px;
+    padding-bottom: 250px;
   }
 `
 
@@ -46,17 +54,17 @@ const MainContent = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.lg};
+    gap: ${({ theme }) => theme.spacing.md};
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    gap: ${({ theme }) => theme.spacing.md};
+    gap: ${({ theme }) => theme.spacing.sm};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    gap: ${({ theme }) => theme.spacing.sm};
+    gap: 12px;
   }
 `
 
@@ -118,9 +126,11 @@ const CleanTimer: React.FC = () => {
   return (
     <>
       <SEO
-        title="PausePad - Modern Pomodoro Timer"
-        description="Modern Pomodoro timer for focused studying, relaxing breaks, and chill work sessions. Boost productivity with timed focus intervals and integrated music."
+        title="Free Online Pomodoro Timer with Music & Tasks | PausePad"
+        description="Free Pomodoro timer with lofi music, task management, and focus tracking. Boost productivity with 25-minute work sessions and relaxing breaks. No signup required. Perfect for studying and work."
         canonical="/timer"
+        keywords="free pomodoro timer, online timer, study timer, focus timer, productivity timer, lofi music timer, task manager, pomodoro technique, work timer, concentration timer"
+        schemaType="WebApplication"
       />
       <TimerContainer
         initial={{ opacity: 0 }}
@@ -129,13 +139,13 @@ const CleanTimer: React.FC = () => {
         transition={{ duration: 0.5 }}
       >
       <BackgroundOverlay />
-      
+
       <ContentWrapper>
         <MainContent>
           <TimerSection>
             <CleanPomodoroTimer />
           </TimerSection>
-          
+
           <TaskSection>
             <CleanTaskPanel onTaskComplete={handleTaskComplete} />
           </TaskSection>

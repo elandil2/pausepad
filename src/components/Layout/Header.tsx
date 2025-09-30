@@ -9,13 +9,17 @@ const HeaderContainer = styled.header`
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(15, 15, 35, 0.8);
+  background: rgba(15, 15, 35, 0.9);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
-  
+
   @media (max-width: 768px) {
     padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px ${({ theme }) => theme.spacing.sm};
   }
 `
 
@@ -38,13 +42,16 @@ const Logo = styled(Link)`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
-  
+  white-space: nowrap;
+
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.fontSizes.xl};
+    gap: 6px;
   }
-  
+
   @media (max-width: 480px) {
     font-size: ${({ theme }) => theme.fontSizes.lg};
+    gap: 4px;
   }
 `
 

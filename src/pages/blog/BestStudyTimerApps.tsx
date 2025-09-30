@@ -89,9 +89,19 @@ const BestStudyTimerApps: React.FC = () => {
   return (
     <>
       <SEO
-        title="Best Study Timer Apps 2024 - Top Pomodoro Timers for Students"
-        description="Discover the best study timer apps for students in 2024. Compare top Pomodoro timers, focus apps, and productivity tools to boost your study sessions."
+        title="Best Study Timer Apps 2025 - Top Pomodoro Timers for Students | PausePad"
+        description="Discover the best study timer apps for students in 2025. Compare top Pomodoro timers, focus apps, and productivity tools to boost your study sessions and exam preparation."
         canonical="/blog/best-study-timer-apps"
+        keywords="study timer apps, best pomodoro timer, student productivity apps, focus timer, study tools, exam preparation apps, concentration timer"
+        schemaType="Article"
+        ogType="article"
+        articleData={{
+          author: "PausePad",
+          publishedTime: "2024-09-02T10:00:00Z",
+          modifiedTime: "2025-10-01T12:00:00Z",
+          section: "Study Tools",
+          tags: ["study apps", "productivity", "pomodoro timer", "student tools", "focus apps"]
+        }}
       />
       <BlogContainer
         initial={{ opacity: 0, y: 20 }}

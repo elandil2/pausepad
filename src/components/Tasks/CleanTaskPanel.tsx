@@ -15,16 +15,32 @@ const TaskPanelContainer = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 24px;
   z-index: 100;
-  
+
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     position: relative;
     right: auto;
     top: auto;
     transform: none;
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     margin: 0 auto;
-    margin-top: ${({ theme }) => theme.spacing.xl};
+    margin-top: ${({ theme }) => theme.spacing.lg};
+    max-height: none;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 20px;
+    max-width: 100%;
+    margin-left: ${({ theme }) => theme.spacing.md};
+    margin-right: ${({ theme }) => theme.spacing.md};
+    margin-bottom: 80px; /* Space for YouTube player */
+  }
+
+  @media (max-width: 400px) {
+    padding: 16px;
+    margin-left: ${({ theme }) => theme.spacing.sm};
+    margin-right: ${({ theme }) => theme.spacing.sm};
+    margin-bottom: 90px;
   }
 `
 
@@ -91,14 +107,21 @@ const AddButton = styled.button`
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  
+  min-height: 36px;
+  min-width: 44px;
+
   &:hover {
     background: #5a6fd8;
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    min-height: 40px;
+    padding: 10px 14px;
   }
 `
 
@@ -134,8 +157,10 @@ const TaskItem = styled(motion.div)<{ $completed: boolean }>`
 `
 
 const TaskCheckbox = styled.button<{ $completed: boolean }>`
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
   border-radius: 50%;
   border: 2px solid ${({ $completed }) => $completed ? '#667eea' : 'rgba(255, 255, 255, 0.3)'};
   background: ${({ $completed }) => $completed ? '#667eea' : 'transparent'};
@@ -145,17 +170,28 @@ const TaskCheckbox = styled.button<{ $completed: boolean }>`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  
+
   &:hover {
     border-color: #667eea;
   }
-  
+
   &::after {
     content: '✓';
     color: white;
-    font-size: 12px;
+    font-size: 14px;
     opacity: ${({ $completed }) => $completed ? 1 : 0};
     transition: opacity 0.2s ease;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+
+    &::after {
+      font-size: 16px;
+    }
   }
 `
 
@@ -174,18 +210,29 @@ const DeleteButton = styled.button`
   border: none;
   color: ${({ theme }) => theme.colors.text.muted};
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
   border-radius: 4px;
   opacity: 0;
   transition: all 0.2s ease;
-  
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   ${TaskItem}:hover & {
     opacity: 1;
   }
-  
+
   &:hover {
     color: #ef4444;
     background: rgba(239, 68, 68, 0.1);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    opacity: 1;
+    min-width: 40px;
+    min-height: 40px;
   }
 `
 

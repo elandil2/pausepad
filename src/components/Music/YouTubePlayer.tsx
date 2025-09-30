@@ -14,11 +14,25 @@ const PlayerContainer = styled.div`
   left: 20px;
   z-index: 999;
   width: 280px;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     width: 260px;
-    bottom: 10px;
-    left: 10px;
+    bottom: 15px;
+    left: 15px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: calc(100vw - 32px);
+    max-width: 340px;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 400px) {
+    width: calc(100vw - 24px);
+    max-width: 320px;
+    bottom: 12px;
   }
 `
 
@@ -46,7 +60,11 @@ const PlayerTitle = styled.h3`
 const ToggleButton = styled(Button)`
   padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  min-width: auto;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const VideoFrame = styled.iframe`
@@ -54,9 +72,13 @@ const VideoFrame = styled.iframe`
   height: 157px;
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   border: none;
-  
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    height: 146px;
+    height: 180px;
+  }
+
+  @media (max-width: 400px) {
+    height: 170px;
   }
 `
 
