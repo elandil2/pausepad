@@ -8,7 +8,7 @@ const TimerContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.xl};
-  max-width: 600px;
+  max-width: 560px;
   margin: 0 auto;
   padding: ${({ theme }) => theme.spacing.xl};
   width: 100%;
@@ -44,7 +44,11 @@ const ModeSelector = styled.div`
     display: none;
   }
 
+  width: min(100%, 430px);
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: 100%;
+    max-width: 100%;
     padding: 2px;
     border-radius: 8px;
   }
@@ -77,7 +81,7 @@ const ModeTab = styled.button<{ $active: boolean }>`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 10px 14px;
     font-size: ${({ theme }) => theme.fontSizes.xs};
-    min-width: 70px;
+    min-width: 78px;
     min-height: 44px;
   }
 
@@ -90,27 +94,12 @@ const ModeTab = styled.button<{ $active: boolean }>`
 
 const TimerCircle = styled.div`
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: clamp(220px, 66vw, 300px);
+  height: clamp(220px, 66vw, 300px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    width: 260px;
-    height: 260px;
-  }
-
-  @media (max-width: 400px) {
-    width: 240px;
-    height: 240px;
-  }
-
-  @media (max-width: 360px) {
-    width: 220px;
-    height: 220px;
-  }
 `
 
 const CircularProgress = styled.svg`
@@ -166,6 +155,10 @@ const TimeText = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     font-size: 2.8rem;
   }
+
+  @media (max-width: 400px) {
+    font-size: 2.5rem;
+  }
 `
 
 const ModeLabel = styled.div`
@@ -180,6 +173,11 @@ const SessionInfo = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.xl};
   margin-top: ${({ theme }) => theme.spacing.lg};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    gap: ${({ theme }) => theme.spacing.lg};
+    margin-top: ${({ theme }) => theme.spacing.md};
+  }
 `
 
 const SessionStat = styled.div`
@@ -230,7 +228,9 @@ const ControlButton = styled(motion.button)<{ $variant?: 'primary' | 'secondary'
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 14px 24px;
     font-size: ${({ theme }) => theme.fontSizes.sm};
-    min-width: 110px;
+    min-width: 0;
+    width: 100%;
+    flex: 1 1 140px;
     min-height: 48px;
   }
 
@@ -252,10 +252,8 @@ const ControlsContainer = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     gap: ${({ theme }) => theme.spacing.sm};
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     width: 100%;
-    max-width: 350px;
+    max-width: 360px;
   }
 
   @media (max-width: 400px) {
@@ -354,7 +352,7 @@ const CleanPomodoroTimer: React.FC<CleanPomodoroTimerProps> = ({ className }) =>
       </ModeSelector>
 
       <TimerCircle>
-        <CircularProgress>
+        <CircularProgress viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet">
           <ProgressTrack
             cx="150"
             cy="150"

@@ -22,7 +22,7 @@ const TaskPanelContainer = styled.div`
     top: auto;
     transform: none;
     width: 100%;
-    max-width: 420px;
+    max-width: 560px;
     margin: 0 auto;
     margin-top: ${({ theme }) => theme.spacing.lg};
     max-height: none;
@@ -31,16 +31,16 @@ const TaskPanelContainer = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 20px;
     max-width: 100%;
-    margin-left: ${({ theme }) => theme.spacing.md};
-    margin-right: ${({ theme }) => theme.spacing.md};
-    margin-bottom: 80px; /* Space for YouTube player */
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
   }
 
   @media (max-width: 400px) {
     padding: 16px;
-    margin-left: ${({ theme }) => theme.spacing.sm};
-    margin-right: ${({ theme }) => theme.spacing.sm};
-    margin-bottom: 90px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
   }
 `
 
@@ -74,7 +74,7 @@ const TaskInputContainer = styled.div`
 
 const TaskInput = styled.input`
   width: 100%;
-  padding: 16px 20px;
+  padding: 16px 84px 16px 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
@@ -95,7 +95,7 @@ const TaskInput = styled.input`
 
 const AddButton = styled.button`
   position: absolute;
-  right: 8px;
+  right: 6px;
   top: 50%;
   transform: translateY(-50%);
   background: #667eea;
@@ -176,7 +176,7 @@ const TaskCheckbox = styled.button<{ $completed: boolean }>`
   }
 
   &::after {
-    content: '✓';
+    content: '\2713';
     color: white;
     font-size: 14px;
     opacity: ${({ $completed }) => $completed ? 1 : 0};
@@ -372,7 +372,7 @@ const CleanTaskPanel: React.FC<CleanTaskPanelProps> = ({
               <DeleteButton
                 onClick={() => deleteTask(task.id)}
               >
-                ✕
+                {'\u00D7'}
               </DeleteButton>
             </TaskItem>
           ))}
@@ -380,7 +380,7 @@ const CleanTaskPanel: React.FC<CleanTaskPanelProps> = ({
         
         {tasks.length === 0 && (
           <EmptyState>
-            No tasks yet. Add one to get started! 🎯
+            No tasks yet. Add one to get started.
           </EmptyState>
         )}
       </TaskList>
@@ -389,3 +389,4 @@ const CleanTaskPanel: React.FC<CleanTaskPanelProps> = ({
 }
 
 export default CleanTaskPanel
+

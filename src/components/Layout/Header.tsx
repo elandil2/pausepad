@@ -147,10 +147,10 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
 
   const navItems = [
-    { path: '/timer', label: 'Timer', icon: '🍅' },
-    { path: '/about', label: 'About', icon: 'ℹ️' },
-    { path: '/blog', label: 'Blog', icon: '📝' },
-    { path: '/privacy', label: 'Privacy', icon: '🔒' },
+    { path: '/timer', label: 'Timer', icon: '\u{1F345}' },
+    { path: '/about', label: 'About', icon: '\u2139\uFE0F' },
+    { path: '/blog', label: 'Blog', icon: '\u{1F4DD}' },
+    { path: '/privacy', label: 'Privacy', icon: '\u{1F512}' },
   ]
 
   const toggleMobileMenu = () => {
@@ -160,9 +160,7 @@ const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <Logo to="/timer">
-          🍅 PausePad
-        </Logo>
+        <Logo to="/timer">{'\u{1F345}'} PausePad</Logo>
 
         <Navigation>
           {navItems.map((item) => {
@@ -188,7 +186,7 @@ const Header: React.FC = () => {
         </Navigation>
 
         <MobileMenuButton onClick={toggleMobileMenu}>
-          {isMobileMenuOpen ? '✕' : '☰'}
+          {isMobileMenuOpen ? '\u00D7' : '\u2630'}
         </MobileMenuButton>
       </HeaderContent>
 
@@ -219,3 +217,4 @@ const Header: React.FC = () => {
 }
 
 export default Header
+

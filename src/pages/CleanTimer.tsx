@@ -8,12 +8,14 @@ import SEO from '../components/SEO'
 
 const TimerContainer = styled(motion.div)`
   min-height: 100vh;
+  min-height: 100dvh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing.lg};
-  padding-top: 80px;
+  padding-top: calc(64px + ${({ theme }) => theme.spacing.md});
+  padding-bottom: ${({ theme }) => theme.spacing['2xl']};
   position: relative;
   overflow-y: auto;
 
@@ -21,26 +23,26 @@ const TimerContainer = styled(motion.div)`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 70px;
-    padding-bottom: ${({ theme }) => theme.spacing.lg};
+    padding-top: calc(60px + ${({ theme }) => theme.spacing.md});
+    padding-bottom: ${({ theme }) => theme.spacing['3xl']};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     padding: ${({ theme }) => theme.spacing.sm};
-    padding-top: 65px;
-    padding-bottom: ${({ theme }) => theme.spacing.md};
+    padding-top: calc(56px + ${({ theme }) => theme.spacing.md});
+    padding-bottom: calc(170px + env(safe-area-inset-bottom));
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: ${({ theme }) => theme.spacing.xs};
-    padding-top: 60px;
-    padding-bottom: 240px; /* Space for YouTube player */
+    padding: ${({ theme }) => theme.spacing.sm};
+    padding-top: calc(52px + ${({ theme }) => theme.spacing.sm});
+    padding-bottom: calc(176px + env(safe-area-inset-bottom));
   }
 
   @media (max-width: 400px) {
     padding: 8px;
-    padding-top: 58px;
-    padding-bottom: 250px;
+    padding-top: calc(50px + ${({ theme }) => theme.spacing.xs});
+    padding-bottom: calc(184px + env(safe-area-inset-bottom));
   }
 `
 
@@ -55,8 +57,9 @@ const MainContent = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.md};
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-start;
+    max-width: 560px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
@@ -72,6 +75,7 @@ const TimerSection = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  min-width: 0;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 100%;
@@ -79,21 +83,15 @@ const TimerSection = styled.div`
 `
 
 const TaskSection = styled.div`
+  width: 320px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.xl}) {
+    width: 300px;
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 100%;
-    max-width: 500px;
-  }
-`
-
-const MusicPlayerWrapper = styled.div`
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 1000;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    left: 10px;
-    bottom: 10px;
+    max-width: 560px;
   }
 `
 
@@ -164,9 +162,7 @@ const CleanTimer: React.FC = () => {
         </MainContent>
       </ContentWrapper>
 
-      <MusicPlayerWrapper>
-        <YouTubePlayer />
-      </MusicPlayerWrapper>
+      <YouTubePlayer />
     </TimerContainer>
     </>
   )
