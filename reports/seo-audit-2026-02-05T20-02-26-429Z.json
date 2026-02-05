@@ -1,0 +1,257 @@
+{
+  "summary": {
+    "startedAt": "2026-02-05T20:02:26.431Z",
+    "finishedAt": "2026-02-05T20:02:32.942Z",
+    "baseUrl": "https://www.pausepad.com",
+    "sitemapUrl": "https://www.pausepad.com/sitemap.xml",
+    "auditedUrls": 19,
+    "failedUrls": 18,
+    "passRate": "5%"
+  },
+  "results": [
+    {
+      "url": "https://www.pausepad.com/",
+      "statusHead": 200,
+      "statusGet": 200,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Free Online Pomodoro Timer with Music & Tasks",
+      "canonical": "https://www.pausepad.com/",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "issues": []
+    },
+    {
+      "url": "https://www.pausepad.com/timer",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/about",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/privacy",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/pomodoro-technique-explained",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/best-study-timer-apps",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/focus-timer-productivity",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/time-management-pomodoro",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/concentration-timer-techniques",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/work-timer-better-focus",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/tr/pomodoro-teknigi-aciklama",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/es/tecnica-pomodoro-explicada",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/ar/pomodoro-arabic-guide",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/it/tecnica-pomodoro-completa",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/zh/pomodoro-technique-guide",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/hi/pomodoro-ka-complete-guide",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/ur/pomodoro-technique-urdu-guide",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    },
+    {
+      "url": "https://www.pausepad.com/blog/ru/pomodoro-tehnika-polnoe-rukovodstvo",
+      "statusHead": 404,
+      "statusGet": 404,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PausePad - Pomodoro Timer",
+      "canonical": null,
+      "robots": null,
+      "issues": [
+        "GET is 404, expected 200",
+        "HEAD is 404, expected 200"
+      ]
+    }
+  ]
+}

@@ -61,6 +61,19 @@ npm run dev
 npm run build
 ```
 
+### SEO / Platform Audits
+```bash
+# Production sitemap + route/status audit
+npm run audit:seo
+
+# Local preview audit (run preview server first)
+npm run audit:seo:local
+```
+
+Detailed execution checklist for ongoing traffic recovery:
+- `PHASE_2_5_RUNBOOK.md`
+- KPI tracking sheet: `reports/kpi-tracker.csv`
+
 ## Configuration
 
 ### Timer Durations

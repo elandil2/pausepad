@@ -9,6 +9,7 @@ declare global {
 }
 
 export const GA_TRACKING_ID = 'G-FK0RKNZG4G'
+let webVitalsInitialized = false
 
 // Initialize Google Analytics
 export const initGA = () => {
@@ -39,6 +40,41 @@ export const trackPageView = (url: string) => {
   window.gtag('config', GA_TRACKING_ID, {
     page_path: url,
   })
+}
+
+export const initWebVitalsTracking = async () => {
+  if (typeof window === 'undefined') return
+  if (webVitalsInitialized) return
+  if (typeof window.gtag === 'undefined') return
+
+  webVitalsInitialized = true
+
+  const { onCLS, onINP, onLCP, onFCP, onTTFB } = await import('web-vitals')
+
+  const reportToGA = ({
+    name,
+    delta,
+    value,
+    id,
+  }: {
+    name: string
+    delta: number
+    value: number
+    id: string
+  }) => {
+    window.gtag?.('event', name, {
+      value: Math.round(delta),
+      metric_id: id,
+      metric_value: Math.round(value),
+      metric_delta: Math.round(delta),
+    })
+  }
+
+  onCLS(reportToGA)
+  onINP(reportToGA)
+  onLCP(reportToGA)
+  onFCP(reportToGA)
+  onTTFB(reportToGA)
 }
 
 // Track custom events

@@ -9,6 +9,7 @@ interface SEOProps {
   ogType?: string
   twitterCard?: string
   keywords?: string
+  robots?: string
   schemaType?: 'WebApplication' | 'Article' | 'WebPage'
   articleData?: {
     author?: string
@@ -27,11 +28,12 @@ const SEO: React.FC<SEOProps> = ({
   ogType = "website",
   twitterCard = "summary_large_image",
   keywords = "pomodoro timer, focus timer, study timer, productivity timer, task manager",
+  robots = "index, follow, max-image-preview:large",
   schemaType = 'WebApplication',
   articleData
 }) => {
   const siteUrl = "https://www.pausepad.com"
-  const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl
+  const fullCanonical = canonical ? `${siteUrl}${canonical}` : undefined
 
   // Generate structured data based on schema type
   const generateStructuredData = () => {
@@ -39,7 +41,7 @@ const SEO: React.FC<SEOProps> = ({
       "@context": "https://schema.org",
       "@type": schemaType,
       "name": "PausePad",
-      "url": fullCanonical,
+      "url": fullCanonical || siteUrl,
       "description": description,
       "image": ogImage
     }
@@ -89,7 +91,7 @@ const SEO: React.FC<SEOProps> = ({
         "dateModified": articleData.modifiedTime || articleData.publishedTime,
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": fullCanonical
+          "@id": fullCanonical || siteUrl
         },
         "articleSection": articleData.section,
         "keywords": articleData.tags?.join(', ')
@@ -106,13 +108,13 @@ const SEO: React.FC<SEOProps> = ({
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      <link rel="canonical" href={fullCanonical} />
+      {fullCanonical && <link rel="canonical" href={fullCanonical} />}
 
       {/* Open Graph */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:url" content={fullCanonical} />
+      {fullCanonical && <meta property="og:url" content={fullCanonical} />}
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content="PausePad" />
       <meta property="og:locale" content="en_US" />
@@ -138,7 +140,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:image:alt" content={title} />
 
       {/* Additional SEO */}
-      <meta name="robots" content="index, follow, max-image-preview:large" />
+      <meta name="robots" content={robots} />
       <meta name="theme-color" content="#667eea" />
 
       {/* Structured Data */}

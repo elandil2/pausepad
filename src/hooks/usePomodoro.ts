@@ -420,12 +420,12 @@ export const usePomodoro = (initialConfig?: Partial<TimerConfig>): UsePomodoroRe
       
       document.title = `${emoji} ${timeStr} - ${modeLabel}${statusIndicator} | PausePad`
     } else {
-      document.title = 'PausePad - Pomodoro Timer'
+      document.title = 'Free Online Pomodoro Timer with Music & Tasks | PausePad'
     }
 
     // Cleanup on unmount
     return () => {
-      document.title = 'PausePad - Pomodoro Timer'
+      document.title = 'Free Online Pomodoro Timer with Music & Tasks | PausePad'
     }
   }, [state.timeRemaining, state.status, state.mode, formatTime])
 

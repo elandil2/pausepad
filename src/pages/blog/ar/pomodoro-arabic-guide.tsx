@@ -93,7 +93,7 @@ const PomodoroArabic: React.FC = () => {
       <SEO
         title="تقنية البومودورو مفصلة - دليل شامل للدراسة والتركيز"
         description="تعلم تقنية البومودورو بالتفصيل. طريقة فعالة للدراسة وإدارة الوقت للتحضير للثانوية العامة والجامعة في الدول العربية."
-        canonical="/blog/ar/تقنية-البومودورو-مفصلة"
+        canonical="/blog/ar/pomodoro-arabic-guide"
       />
       <BlogContainer
         initial={{ opacity: 0, y: 20 }}

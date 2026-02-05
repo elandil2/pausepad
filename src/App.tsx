@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AnimatePresence } from 'framer-motion'
 import { HelmetProvider } from 'react-helmet-async'
-import { initGA, trackPageView } from './utils/analytics'
+import { initGA, initWebVitalsTracking, trackPageView } from './utils/analytics'
 
 // Import pages
 import CleanTimer from './pages/CleanTimer'
 import About from './pages/About'
 import Blog from './pages/Blog'
 import Privacy from './pages/Privacy'
+import NotFound from './pages/NotFound'
 
 // Import blog pages
 import PomodoroTechniqueExplained from './pages/blog/PomodoroTechniqueExplained'
@@ -61,6 +62,9 @@ const App: React.FC = () => {
   useEffect(() => {
     // Initialize Google Analytics on mount
     initGA()
+
+    // Collect Core Web Vitals for ongoing SEO/performance monitoring
+    void initWebVitalsTracking()
   }, [])
 
   return (
@@ -97,6 +101,7 @@ const App: React.FC = () => {
                   <Route path="/blog/hi/pomodoro-ka-complete-guide" element={<PomodoroHindi />} />
                   <Route path="/blog/ur/pomodoro-technique-urdu-guide" element={<PomodoroUrdu />} />
                   <Route path="/blog/ru/pomodoro-tehnika-polnoe-rukovodstvo" element={<PomodoroRussian />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </AnimatePresence>
             </div>

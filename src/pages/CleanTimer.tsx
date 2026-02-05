@@ -113,6 +113,17 @@ const ContentWrapper = styled.div`
   width: 100%;
 `
 
+const SrOnlyHeading = styled.h1`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+`
+
 const CleanTimer: React.FC = () => {
   const [completedTasks, setCompletedTasks] = useState(0)
 
@@ -138,6 +149,7 @@ const CleanTimer: React.FC = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
+      <SrOnlyHeading>Free Online Pomodoro Timer with Music and Tasks</SrOnlyHeading>
       <BackgroundOverlay />
 
       <ContentWrapper>

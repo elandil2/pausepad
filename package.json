@@ -14,7 +14,9 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "audit:seo": "node scripts/seo-audit.mjs --base=https://www.pausepad.com --max=50",
+    "audit:seo:local": "node scripts/seo-audit.mjs --base=http://127.0.0.1:4173 --sitemap=http://127.0.0.1:4173/sitemap.xml --max=50"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.17.15",
@@ -32,6 +34,7 @@
     "react-router-dom": "^6.20.1",
     "styled-components": "^6.1.8",
     "uuid": "^9.0.1",
+    "web-vitals": "^5.1.0",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
