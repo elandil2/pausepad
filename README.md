@@ -2,7 +2,7 @@
 
 A free, distraction-free Pomodoro timer with a task list and lofi focus music. No sign-up, no ads.
 
-**Live site:** https://www.pausepad.com
+**Live site:** https://pausepad.vercel.app (pausepad.com is being re-registered)
 
 ## Features
 

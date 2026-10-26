@@ -100,7 +100,7 @@ headline = font(True, 66)
 d.text((72, 220), 'Free Pomodoro', font=headline, fill=WHITE)
 d.text((72, 300), 'timer', font=headline, fill=WHITE)
 d.text((72, 410), 'Tasks · Focus music · No sign-up', font=font(False, 32), fill=MUTED)
-d.text((72, 520), 'pausepad.com', font=font(True, 30), fill=TOMATO)
+d.text((72, 520), 'pausepad.vercel.app', font=font(True, 30), fill=TOMATO)
 
 og.save(PUBLIC / 'og-image.png', optimize=True)
 

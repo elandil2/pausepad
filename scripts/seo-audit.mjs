@@ -8,7 +8,7 @@ const args = Object.fromEntries(
   }),
 )
 
-const baseUrl = (args.base || 'https://www.pausepad.com').replace(/\/$/, '')
+const baseUrl = (args.base || 'https://pausepad.vercel.app').replace(/\/$/, '')
 const sitemapUrl = args.sitemap || `${baseUrl}/sitemap.xml`
 const maxUrls = Number(args.max || 30)
 const timeoutMs = Number(args.timeout || 15000)
