@@ -119,6 +119,7 @@ const MobilePanel = styled.nav`
 
 const navItems = [
   { to: '/', label: 'Timer', end: true },
+  { to: '/how-it-works', label: 'How it works', end: true },
   { to: '/blog', label: 'Blog', end: false },
   { to: '/about', label: 'About', end: true },
 ]

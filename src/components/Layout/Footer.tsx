@@ -126,6 +126,7 @@ const Footer: React.FC = () => (
         <h2>PausePad</h2>
         <ul>
           <li><Link to="/">Pomodoro timer</Link></li>
+          <li><Link to="/how-it-works">How it works</Link></li>
           <li><Link to="/blog">Blog</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/privacy">Privacy</Link></li>

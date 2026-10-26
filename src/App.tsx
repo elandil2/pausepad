@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
+import Backdrop from './components/Layout/Backdrop'
 import { routes } from './routes'
 import { theme } from './styles/theme'
 import { trackPageView } from './utils/analytics'
@@ -26,6 +27,7 @@ const RouteEffects: React.FC = () => {
 const App: React.FC = () => (
   <ThemeProvider theme={theme}>
     <RouteEffects />
+    <Backdrop />
     <a className="skip-link" href="#main">
       Skip to content
     </a>

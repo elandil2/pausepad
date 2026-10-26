@@ -43,6 +43,8 @@ export const displayHeading = css`
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1.05;
+  /* Ink drop shadow keeps headings readable over the backdrop scenery */
+  text-shadow: 3px 3px 0 ${({ theme }) => theme.colors.ink};
 `
 
 export const PageTitle = styled.h1`

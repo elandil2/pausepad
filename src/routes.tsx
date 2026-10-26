@@ -1,6 +1,7 @@
 import React from 'react'
 import Home from './pages/Home'
 import About from './pages/About'
+import HowItWorks from './pages/HowItWorks'
 import Blog from './pages/Blog'
 import Privacy from './pages/Privacy'
 import NotFound from './pages/NotFound'
@@ -30,6 +31,7 @@ export interface AppRoute {
 
 export const routes: AppRoute[] = [
   { path: '/', element: <Home />, priority: 1.0, changefreq: 'weekly' },
+  { path: '/how-it-works', element: <HowItWorks />, priority: 0.8, changefreq: 'monthly' },
   { path: '/blog', element: <Blog />, priority: 0.8, changefreq: 'weekly' },
   { path: '/about', element: <About />, priority: 0.5, changefreq: 'monthly' },
   { path: '/privacy', element: <Privacy />, priority: 0.3, changefreq: 'yearly' },

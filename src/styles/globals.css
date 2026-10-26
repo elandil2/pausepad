@@ -43,6 +43,12 @@ h3 {
   font-family: 'Outfit', 'DM Sans', system-ui, sans-serif;
 }
 
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
 #root {
   min-height: 100vh;
   min-height: 100dvh;
