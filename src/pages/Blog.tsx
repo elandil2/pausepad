@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import SEO from '../components/SEO'
-import { Eyebrow, Lead, Page, PageHeader, PageTitle } from '../components/Layout/Page'
+import { Eyebrow, Lead, Page, PageHeader, PageTitle, cardStyles } from '../components/Layout/Page'
 import { posts } from '../content/posts'
 import { absoluteUrl } from '../config/site'
 
@@ -10,12 +10,12 @@ const Group = styled.section`
   margin-top: 40px;
 
   > h2 {
-    margin-bottom: 16px;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.text.muted};
+    margin-bottom: 18px;
+    font-family: ${({ theme }) => theme.fonts.display};
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: ${({ theme }) => theme.colors.onBg.primary};
   }
 `
 
@@ -23,35 +23,36 @@ const Grid = styled.ul`
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 20px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 `
 
 const PostCard = styled(Link)`
+  ${cardStyles}
   display: flex;
   flex-direction: column;
   gap: 8px;
   height: 100%;
   padding: 24px;
-  border-radius: ${({ theme }) => theme.radius.lg};
-  border: 1px solid ${({ theme }) => theme.colors.surface.border};
-  background: ${({ theme }) => theme.colors.surface.base};
   transition:
-    background ${({ theme }) => theme.transitions.fast},
-    border-color ${({ theme }) => theme.transitions.fast};
+    transform ${({ theme }) => theme.transitions.fast},
+    box-shadow ${({ theme }) => theme.transitions.fast};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.surface.raised};
-    border-color: ${({ theme }) => theme.colors.surface.borderStrong};
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 ${({ theme }) => theme.colors.ink};
   }
 
   h3 {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-    line-height: 1.35;
-    color: ${({ theme }) => theme.colors.text.primary};
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: ${({ theme }) => theme.colors.ink};
   }
 
   p {
@@ -61,22 +62,30 @@ const PostCard = styled(Link)`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 18px;
+    box-shadow: ${({ theme }) => theme.shadows.small};
   }
 `
 
 const Meta = styled.span`
+  align-self: flex-start;
+  padding: 2px 10px;
+  border: ${({ theme }) => theme.borderThin};
+  border-radius: ${({ theme }) => theme.radius.full};
+  background: ${({ theme }) => theme.colors.surface.tint};
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.text.muted};
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text.secondary};
 `
 
 const Badge = styled.span`
   align-self: flex-start;
   padding: 2px 10px;
+  border: ${({ theme }) => theme.borderThin};
   border-radius: ${({ theme }) => theme.radius.full};
-  background: rgba(255, 107, 91, 0.14);
-  color: ${({ theme }) => theme.colors.accent.primary};
+  background: ${({ theme }) => theme.colors.accent.primary};
+  color: ${({ theme }) => theme.colors.ink};
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  font-weight: 600;
+  font-weight: 800;
 `
 
 const english = posts.filter((p) => p.lang === 'en')
@@ -112,12 +121,12 @@ const Blog: React.FC = () => (
       </PageHeader>
 
       <Group aria-labelledby="en-heading">
-        <h2 id="en-heading">Guides</h2>
+        <h2 id="en-heading">📚 Guides</h2>
         <Grid>
           {english.map((post) => (
             <li key={post.path}>
               <PostCard to={post.path}>
-                <Meta>{post.readMinutes} min read</Meta>
+                <Meta>⏱ {post.readMinutes} min read</Meta>
                 <h3>{post.title}</h3>
                 <p>{post.excerpt}</p>
               </PostCard>
@@ -127,7 +136,7 @@ const Blog: React.FC = () => (
       </Group>
 
       <Group aria-labelledby="intl-heading">
-        <h2 id="intl-heading">Pomodoro guide in other languages</h2>
+        <h2 id="intl-heading">🌍 Pomodoro guide in other languages</h2>
         <Grid>
           {international.map((post) => (
             <li key={post.path} lang={post.lang} dir={post.rtl ? 'rtl' : undefined}>

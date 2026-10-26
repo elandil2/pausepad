@@ -5,7 +5,7 @@ import SEO from '../components/SEO'
 import Timer from '../components/Timer/Timer'
 import TaskList from '../components/Tasks/TaskList'
 import MusicPlayer from '../components/Music/MusicPlayer'
-import { Card, Eyebrow } from '../components/Layout/Page'
+import { Card, Eyebrow, PrimaryLink, cardStyles, displayHeading } from '../components/Layout/Page'
 import { SITE_NAME, SITE_URL } from '../config/site'
 import { posts } from '../content/posts'
 
@@ -13,79 +13,97 @@ const Main = styled.main`
   width: 100%;
   max-width: ${({ theme }) => theme.layout.maxWidth};
   margin: 0 auto;
-  padding: 28px 20px 80px;
+  padding: 36px 20px 88px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: 16px 12px 56px;
-  }
-`
-
-const Intro = styled.div`
-  margin-bottom: 20px;
-  text-align: center;
-
-  h1 {
-    font-size: clamp(1.35rem, 1rem + 1.6vw, 2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  p {
-    margin-top: 6px;
-    color: ${({ theme }) => theme.colors.text.secondary};
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    margin-bottom: 14px;
-
-    p {
-      font-size: ${({ theme }) => theme.fontSizes.sm};
-    }
+    padding: 20px 14px 56px;
   }
 `
 
 const AppGrid = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: 20px;
+  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  grid-template-areas:
+    'intro timer'
+    'side timer';
+  grid-template-rows: auto 1fr;
+  gap: 24px 32px;
   align-items: start;
 
-  @media (max-width: 920px) {
+  @media (max-width: 960px) {
     grid-template-columns: minmax(0, 1fr);
-    max-width: 600px;
+    grid-template-areas: 'intro' 'timer' 'side';
+    grid-template-rows: none;
+    max-width: 620px;
     margin: 0 auto;
-    gap: 14px;
+    gap: 18px;
+  }
+`
+
+const Intro = styled.div`
+  grid-area: intro;
+
+  h1 {
+    ${displayHeading}
+    font-size: clamp(2.2rem, 1.4rem + 3vw, 3.4rem);
+    color: ${({ theme }) => theme.colors.onBg.primary};
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.onBg.secondary};
+  }
+
+  @media (max-width: 960px) {
+    text-align: center;
+
+    p {
+      font-size: ${({ theme }) => theme.fontSizes.base};
+    }
+  }
+`
+
+const TimerArea = styled.div`
+  grid-area: timer;
+
+  @media (min-width: 961px) {
+    position: sticky;
+    top: calc(${({ theme }) => theme.layout.headerHeight} + 20px);
   }
 `
 
 const Side = styled.div`
+  grid-area: side;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 
-  @media (max-width: 920px) {
-    gap: 14px;
+  @media (max-width: 960px) {
+    gap: 18px;
   }
 `
 
 const Section = styled.section`
-  margin-top: 88px;
+  margin-top: 96px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     margin-top: 64px;
   }
 
   > h2 {
-    font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    ${displayHeading}
+    font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem);
+    color: ${({ theme }) => theme.colors.onBg.primary};
     margin-bottom: 10px;
   }
 
   > p {
-    max-width: 680px;
-    color: ${({ theme }) => theme.colors.text.secondary};
+    max-width: 640px;
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.onBg.secondary};
     margin-bottom: 28px;
   }
 `
@@ -95,7 +113,7 @@ const Steps = styled.ol`
   counter-reset: step;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 20px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-template-columns: repeat(2, 1fr);
@@ -103,6 +121,7 @@ const Steps = styled.ol`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   li {
@@ -118,18 +137,20 @@ const Steps = styled.ol`
     content: counter(step);
     display: grid;
     place-items: center;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     margin-bottom: 14px;
+    border: ${({ theme }) => theme.borderThin};
     border-radius: 50%;
-    background: rgba(255, 107, 91, 0.15);
-    color: ${({ theme }) => theme.colors.accent.primary};
-    font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
+    background: ${({ theme }) => theme.colors.accent.primary};
+    font-family: ${({ theme }) => theme.fonts.display};
+    font-weight: 900;
+    font-size: 1.1rem;
   }
 
   h3 {
-    font-size: ${({ theme }) => theme.fontSizes.base};
+    font-size: 1.15rem;
+    font-weight: 800;
     margin-bottom: 6px;
   }
 
@@ -143,7 +164,7 @@ const Features = styled.ul`
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-template-columns: repeat(2, 1fr);
@@ -151,6 +172,7 @@ const Features = styled.ul`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   ${Card} {
@@ -158,11 +180,20 @@ const Features = styled.ul`
     padding: 22px;
   }
 
+  .icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 14px;
+    border: ${({ theme }) => theme.borderThin};
+    border-radius: 50%;
+    font-size: 1.4rem;
+  }
+
   h3 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: ${({ theme }) => theme.fontSizes.base};
+    font-size: 1.15rem;
+    font-weight: 800;
     margin-bottom: 6px;
   }
 
@@ -175,13 +206,12 @@ const Features = styled.ul`
 const Faq = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
   max-width: 820px;
 
   details {
-    border-radius: ${({ theme }) => theme.radius.md};
-    border: 1px solid ${({ theme }) => theme.colors.surface.border};
-    background: ${({ theme }) => theme.colors.surface.base};
+    ${cardStyles}
+    box-shadow: ${({ theme }) => theme.shadows.small};
   }
 
   summary {
@@ -191,7 +221,9 @@ const Faq = styled.div`
     justify-content: space-between;
     gap: 16px;
     padding: 16px 20px;
-    font-weight: 600;
+    font-family: ${({ theme }) => theme.fonts.display};
+    font-size: 1.1rem;
+    font-weight: 800;
     cursor: pointer;
 
     &::-webkit-details-marker {
@@ -201,10 +233,15 @@ const Faq = styled.div`
     &::after {
       content: '+';
       flex-shrink: 0;
-      font-size: 1.3rem;
-      font-weight: 400;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: ${({ theme }) => theme.borderThin};
+      border-radius: 50%;
+      background: ${({ theme }) => theme.colors.accent.primary};
+      font-size: 1.1rem;
       line-height: 1;
-      color: ${({ theme }) => theme.colors.text.muted};
     }
   }
 
@@ -222,28 +259,31 @@ const PostGrid = styled.ul`
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   a {
+    ${cardStyles}
     display: block;
     height: 100%;
     padding: 22px;
-    border-radius: ${({ theme }) => theme.radius.lg};
-    border: 1px solid ${({ theme }) => theme.colors.surface.border};
-    background: ${({ theme }) => theme.colors.surface.base};
-    transition: background ${({ theme }) => theme.transitions.fast};
+    transition:
+      transform ${({ theme }) => theme.transitions.fast},
+      box-shadow ${({ theme }) => theme.transitions.fast};
 
     &:hover {
-      background: ${({ theme }) => theme.colors.surface.raised};
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 ${({ theme }) => theme.colors.ink};
     }
   }
 
   h3 {
-    font-size: ${({ theme }) => theme.fontSizes.base};
+    font-size: 1.15rem;
+    font-weight: 800;
     margin-bottom: 6px;
   }
 
@@ -253,11 +293,8 @@ const PostGrid = styled.ul`
   }
 `
 
-const MoreLink = styled(Link)`
-  display: inline-block;
-  margin-top: 20px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.accent.primary};
+const MoreLink = styled(PrimaryLink)`
+  margin-top: 28px;
 `
 
 const steps = [
@@ -268,12 +305,12 @@ const steps = [
 ]
 
 const features = [
-  { icon: '⏱️', title: 'Accurate timer', text: 'Keeps exact time even in a background tab, and shows the countdown in the browser tab title.' },
-  { icon: '✅', title: 'Simple task list', text: 'Plan what to work on next. Tasks are saved in your browser, no account needed.' },
-  { icon: '🎧', title: 'Lofi focus music', text: 'Pick a 24/7 lofi, jazz or synthwave stream and keep it playing while you work.' },
-  { icon: '⚙️', title: 'Custom durations', text: 'Change the length of pomodoros and breaks, or switch to a 50-minute deep focus session.' },
-  { icon: '🔔', title: 'Sound & notifications', text: 'A gentle chime and a desktop notification tell you when it is time to switch.' },
-  { icon: '🔒', title: 'Free & private', text: 'No sign-up, no ads, no tracking of your tasks. Everything stays on your device.' },
+  { icon: '⏱️', color: '#ff7a59', title: 'Accurate timer', text: 'Keeps exact time even in a background tab, and shows the countdown in the browser tab title.' },
+  { icon: '✅', color: '#58d68d', title: 'Simple task list', text: 'Plan what to work on next. Tasks are saved in your browser, no account needed.' },
+  { icon: '🎧', color: '#ff6fb1', title: 'Lofi focus music', text: 'Pick a 24/7 lofi, jazz or synthwave stream and keep it playing while you work.' },
+  { icon: '⚙️', color: '#4fb6ff', title: 'Custom durations', text: 'Change the length of pomodoros and breaks, or switch to a 50-minute deep focus session.' },
+  { icon: '🔔', color: '#ffcf33', title: 'Sound & notifications', text: 'A gentle chime and a desktop notification tell you when it is time to switch.' },
+  { icon: '🔒', color: '#c4b5fd', title: 'Free & private', text: 'No sign-up, no ads, no tracking of your tasks. Everything stays on your device.' },
 ]
 
 const faqs = [
@@ -337,13 +374,14 @@ const Home: React.FC = () => (
       jsonLd={[appSchema, websiteSchema, faqSchema]}
     />
     <Main id="main">
-      <Intro>
-        <h1>Free online Pomodoro timer</h1>
-        <p>Focus in 25-minute sessions, keep a task list and play lofi music.</p>
-      </Intro>
-
       <AppGrid>
-        <Timer />
+        <Intro>
+          <h1>Pomodoro timer 🍅</h1>
+          <p>Free, no sign-up. Focus in 25-minute sessions, keep a task list and play lofi music.</p>
+        </Intro>
+        <TimerArea>
+          <Timer />
+        </TimerArea>
         <Side>
           <TaskList />
           <MusicPlayer />
@@ -377,10 +415,10 @@ const Home: React.FC = () => (
           {features.map((feature) => (
             <li key={feature.title}>
               <Card>
-                <h3>
-                  <span aria-hidden="true">{feature.icon}</span>
-                  {feature.title}
-                </h3>
+                <span className="icon" style={{ background: feature.color }} aria-hidden="true">
+                  {feature.icon}
+                </span>
+                <h3>{feature.title}</h3>
                 <p>{feature.text}</p>
               </Card>
             </li>

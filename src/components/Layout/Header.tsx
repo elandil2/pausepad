@@ -7,10 +7,8 @@ const Bar = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(12, 13, 22, 0.8);
-  backdrop-filter: saturate(160%) blur(16px);
-  -webkit-backdrop-filter: saturate(160%) blur(16px);
-  border-bottom: 1px solid ${({ theme }) => theme.colors.surface.border};
+  background: ${({ theme }) => theme.colors.bg.primary};
+  border-bottom: ${({ theme }) => theme.border};
 `
 
 const Inner = styled.div`
@@ -24,7 +22,7 @@ const Inner = styled.div`
   gap: 16px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    height: 56px;
+    height: 60px;
     padding: 0 16px;
   }
 `
@@ -33,16 +31,25 @@ const Brand = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: ${({ theme }) => theme.colors.text.primary};
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: ${({ theme }) => theme.colors.onBg.primary};
+
+  svg {
+    border: ${({ theme }) => theme.borderThin};
+    border-radius: 50%;
+    background: #fff;
+    padding: 2px;
+    box-shadow: ${({ theme }) => theme.shadows.pressed};
+  }
 `
 
 const DesktopNav = styled.nav`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: none;
@@ -50,23 +57,26 @@ const DesktopNav = styled.nav`
 `
 
 const Item = styled(NavLink)`
-  padding: 8px 14px;
+  padding: 7px 16px;
+  border: 2px solid transparent;
   border-radius: ${({ theme }) => theme.radius.full};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-size: ${({ theme }) => theme.fontSizes.base};
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.onBg.primary};
   transition:
     background ${({ theme }) => theme.transitions.fast},
     color ${({ theme }) => theme.transitions.fast};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.text.primary};
-    background: ${({ theme }) => theme.colors.surface.raised};
+    background: rgba(255, 255, 255, 0.16);
   }
 
   &.active {
-    color: ${({ theme }) => theme.colors.text.primary};
-    background: ${({ theme }) => theme.colors.surface.hover};
+    color: ${({ theme }) => theme.colors.ink};
+    background: ${({ theme }) => theme.colors.surface.base};
+    border: ${({ theme }) => theme.borderThin};
+    box-shadow: ${({ theme }) => theme.shadows.pressed};
   }
 `
 
@@ -74,15 +84,14 @@ const MenuButton = styled.button`
   display: none;
   width: 44px;
   height: 44px;
-  margin-right: -10px;
+  margin-right: -4px;
+  border: ${({ theme }) => theme.borderThin};
   border-radius: ${({ theme }) => theme.radius.md};
+  background: ${({ theme }) => theme.colors.surface.base};
+  box-shadow: ${({ theme }) => theme.shadows.pressed};
   align-items: center;
   justify-content: center;
-  color: ${({ theme }) => theme.colors.text.primary};
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.surface.raised};
-  }
+  color: ${({ theme }) => theme.colors.ink};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: inline-flex;
@@ -95,14 +104,15 @@ const MobilePanel = styled.nav`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 8px 12px 16px;
-    border-top: 1px solid ${({ theme }) => theme.colors.surface.border};
+    gap: 6px;
+    padding: 12px 16px 18px;
+    border-top: ${({ theme }) => theme.border};
+    background: ${({ theme }) => theme.colors.bg.deep};
 
     ${Item} {
-      padding: 12px 14px;
+      padding: 12px 16px;
       border-radius: ${({ theme }) => theme.radius.md};
-      font-size: ${({ theme }) => theme.fontSizes.base};
+      font-size: ${({ theme }) => theme.fontSizes.lg};
     }
   }
 `

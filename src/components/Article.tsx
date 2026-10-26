@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import SEO from './SEO'
-import { Card, Page, PrimaryLink, proseStyles } from './Layout/Page'
+import { Page, PrimaryLink, cardStyles, displayHeading, proseStyles } from './Layout/Page'
 import { getPost, getTranslations, posts } from '../content/posts'
 import { absoluteUrl } from '../config/site'
 
@@ -71,31 +71,29 @@ export const ContentWrapper = styled.div`
 
 export const BackLink = styled(Link)`
   align-self: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
+  padding: 6px 14px;
+  border: ${({ theme }) => theme.borderThin};
+  border-radius: ${({ theme }) => theme.radius.full};
+  background: #fff;
+  box-shadow: ${({ theme }) => theme.shadows.pressed};
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.text.muted};
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.text.primary};
-  }
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.ink};
 `
 
 const Title = styled.h1`
-  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.6rem);
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: ${({ theme }) => theme.colors.text.primary};
+  ${displayHeading}
+  font-size: clamp(2rem, 1.3rem + 3vw, 3.2rem);
+  color: ${({ theme }) => theme.colors.onBg.primary};
   text-wrap: balance;
 `
 
 const Meta = styled.p`
-  margin: 14px 0 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.surface.border};
+  margin: 14px 0 28px;
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.text.muted};
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.onBg.secondary};
 `
 
 export const PageTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -115,32 +113,46 @@ export const PageTitle: React.FC<{ children: React.ReactNode }> = ({ children })
 }
 
 export const BlogCard = styled.div`
+  ${cardStyles}
   ${proseStyles}
+  padding: 36px 40px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 22px 18px;
+    box-shadow: ${({ theme }) => theme.shadows.small};
+  }
 `
 
-const Cta = styled(Card)`
-  margin-top: 48px;
+const Cta = styled.div`
+  ${cardStyles}
+  margin-top: 40px;
+  padding: 24px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  background: linear-gradient(135deg, rgba(255, 107, 91, 0.14), rgba(255, 107, 91, 0.04));
-  border-color: rgba(255, 107, 91, 0.28);
+  background: ${({ theme }) => theme.colors.accent.primary};
 
   h2 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    font-weight: 900;
     margin-bottom: 4px;
   }
 
   p {
+    font-weight: 500;
     color: ${({ theme }) => theme.colors.text.secondary};
-    font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
+
+  a {
+    background: #fff;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     flex-direction: column;
     align-items: stretch;
     text-align: center;
+    padding: 20px;
   }
 `
 
@@ -148,32 +160,29 @@ const More = styled.nav`
   margin-top: 48px;
 
   h2 {
-    margin-bottom: 14px;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.text.muted};
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: ${({ theme }) => theme.colors.onBg.primary};
   }
 
   ul {
     list-style: none;
     display: grid;
-    gap: 10px;
+    gap: 12px;
   }
 
   a {
+    ${cardStyles}
     display: block;
-    padding: 14px 18px;
-    border-radius: ${({ theme }) => theme.radius.md};
-    border: 1px solid ${({ theme }) => theme.colors.surface.border};
-    background: ${({ theme }) => theme.colors.surface.base};
-    color: ${({ theme }) => theme.colors.text.primary};
-    font-weight: 500;
-    transition: background ${({ theme }) => theme.transitions.fast};
+    padding: 16px 20px;
+    box-shadow: ${({ theme }) => theme.shadows.small};
+    font-weight: 700;
+    transition: transform ${({ theme }) => theme.transitions.fast};
 
     &:hover {
-      background: ${({ theme }) => theme.colors.surface.raised};
+      transform: translate(-2px, -2px);
     }
   }
 `
@@ -190,14 +199,14 @@ export const BlogContainer: React.FC<{ children: React.ReactNode }> = ({ childre
 
       <Cta>
         <div>
-          <h2>Try the free Pomodoro timer</h2>
+          <h2>Try the free Pomodoro timer 🍅</h2>
           <p>25-minute focus sessions, a task list and lofi music. No sign-up.</p>
         </div>
         <PrimaryLink to="/">Start focusing</PrimaryLink>
       </Cta>
 
       <More aria-label="More articles">
-        <h2>Keep reading</h2>
+        <h2>Keep reading 📚</h2>
         <ul>
           {related.map((p) => (
             <li key={p.path}>

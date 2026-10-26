@@ -2,77 +2,40 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { readStorage, writeStorage } from '../../utils/storage'
 import { trackMusicEvent } from '../../utils/analytics'
+import { Window } from '../Layout/Page'
 
 interface Station {
   id: string
   name: string
   description: string
-  colors: [string, string]
+  emoji: string
+  color: string
 }
 
 // 24/7 live streams from Lofi Girl. IDs verified via YouTube oEmbed.
 const stations: Station[] = [
-  { id: 'jfKfPfyJRdk', name: 'Lofi hip hop', description: 'Beats to relax / study to', colors: ['#7c5cff', '#ff6b5b'] },
-  { id: 'HuFYqnbVbzY', name: 'Jazz lofi', description: 'Smooth jazz beats', colors: ['#f59e0b', '#b45309'] },
-  { id: '28KRPhVzCus', name: 'Sleepy lofi', description: 'Slow, calm beats', colors: ['#1e3a8a', '#6366f1'] },
-  { id: 'SXySxLgCV-8', name: 'Summer lofi', description: 'Warm, sunny beats', colors: ['#fb7185', '#fbbf24'] },
-  { id: '4xDzrJKXOOY', name: 'Synthwave', description: 'Retro electronic', colors: ['#db2777', '#0ea5e9'] },
+  { id: 'jfKfPfyJRdk', name: 'Lofi', description: 'Beats to relax / study to', emoji: '🎧', color: '#ff9f59' },
+  { id: 'HuFYqnbVbzY', name: 'Jazz', description: 'Smooth jazz beats', emoji: '🎷', color: '#ffcf33' },
+  { id: '28KRPhVzCus', name: 'Sleepy', description: 'Slow, calm beats', emoji: '😴', color: '#4fb6ff' },
+  { id: 'SXySxLgCV-8', name: 'Summer', description: 'Warm, sunny beats', emoji: '☀️', color: '#58d68d' },
+  { id: '4xDzrJKXOOY', name: 'Synth', description: 'Retro synthwave', emoji: '🌆', color: '#ff6fb1' },
 ]
 
 const STORAGE_KEY = 'pausepad-station'
 
-const Panel = styled.section`
+const Body = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 20px;
-  border-radius: ${({ theme }) => theme.radius.lg};
-  background: ${({ theme }) => theme.colors.surface.base};
-  border: 1px solid ${({ theme }) => theme.colors.surface.border};
-  box-shadow: ${({ theme }) => theme.shadows.card};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: 16px;
-  }
-`
-
-const Head = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-
-  h2 {
-    font-size: ${({ theme }) => theme.fontSizes.base};
-    font-weight: 600;
-  }
-`
-
-const Live = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.text.muted};
-
-  &::before {
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: ${({ theme }) => theme.colors.accent.primary};
-  }
+  gap: 16px;
 `
 
 const Screen = styled.div`
   position: relative;
   aspect-ratio: 16 / 9;
+  border: ${({ theme }) => theme.borderThin};
   border-radius: ${({ theme }) => theme.radius.md};
   overflow: hidden;
-  background: #000;
+  background: ${({ theme }) => theme.colors.ink};
 
   iframe {
     width: 100%;
@@ -81,92 +44,91 @@ const Screen = styled.div`
   }
 `
 
-const Poster = styled.button`
+const Poster = styled.button<{ $color: string }>`
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: 2px;
-  padding: 18px;
-  text-align: start;
-  color: #fff;
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: ${({ $color }) => $color};
+  background-image: radial-gradient(rgba(22, 19, 43, 0.12) 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+  color: ${({ theme }) => theme.colors.ink};
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -20%;
-    background:
-      radial-gradient(40% 50% at 25% 30%, rgba(255, 255, 255, 0.25), transparent 70%),
-      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 9px);
-    opacity: 0.6;
-  }
-
-  strong,
-  small,
-  span {
-    position: relative;
+  .emoji {
+    font-size: 2.6rem;
+    line-height: 1;
   }
 
   strong {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-    font-weight: 700;
+    font-family: ${({ theme }) => theme.fonts.display};
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
   }
 
-  small {
+  .play {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    padding: 6px 16px;
+    border: ${({ theme }) => theme.borderThin};
+    border-radius: ${({ theme }) => theme.radius.full};
+    background: #fff;
+    box-shadow: ${({ theme }) => theme.shadows.pressed};
     font-size: ${({ theme }) => theme.fontSizes.sm};
-    opacity: 0.85;
-  }
-
-  span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: rgba(255, 255, 255, 0.95);
-    color: #111;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    font-weight: 800;
     transition: transform ${({ theme }) => theme.transitions.fast};
   }
 
-  &:hover span {
-    transform: translate(-50%, -50%) scale(1.06);
+  &:hover .play {
+    transform: translate(-1px, -1px);
   }
 `
 
 const Stations = styled.ul`
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 6px;
 `
 
-const Chip = styled.button<{ $active: boolean }>`
-  min-height: 36px;
-  padding: 0 14px;
-  border-radius: ${({ theme }) => theme.radius.full};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: 500;
-  border: 1px solid
-    ${({ theme, $active }) => ($active ? 'rgba(255, 107, 91, 0.6)' : theme.colors.surface.border)};
-  background: ${({ $active }) => ($active ? 'rgba(255, 107, 91, 0.14)' : 'transparent')};
-  color: ${({ theme, $active }) => ($active ? theme.colors.text.primary : theme.colors.text.secondary)};
+const Avatar = styled.button<{ $color: string; $active: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 700;
+  color: ${({ theme, $active }) => ($active ? theme.colors.ink : theme.colors.text.muted)};
 
-  &:hover {
-    color: ${({ theme }) => theme.colors.text.primary};
-    background: ${({ theme, $active }) => ($active ? 'rgba(255, 107, 91, 0.18)' : theme.colors.surface.raised)};
+  span {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border: ${({ theme }) => theme.borderThin};
+    border-radius: 50%;
+    background: ${({ $color }) => $color};
+    font-size: 1.35rem;
+    line-height: 1;
+    box-shadow: ${({ theme, $active }) => ($active ? theme.shadows.small : 'none')};
+    transform: ${({ $active }) => ($active ? 'translate(-2px, -2px)' : 'none')};
+    transition: transform ${({ theme }) => theme.transitions.fast};
+  }
+
+  &:hover span {
+    transform: translate(-2px, -2px);
   }
 `
 
 const Note = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.text.muted};
 `
 
@@ -188,54 +150,67 @@ const MusicPlayer: React.FC = () => {
   }
 
   return (
-    <Panel aria-labelledby="music-heading">
-      <Head>
-        <h2 id="music-heading">Focus music</h2>
-        <Live>Live</Live>
-      </Head>
+    <Window
+      icon="🎶"
+      iconColor="#ff6fb1"
+      title="Focus music"
+      subtitle={playing ? `Now playing: ${station.name} ${station.emoji}` : '24/7 live lofi streams'}
+      headingId="music-heading"
+      tint
+    >
+      <Body>
+        <Screen>
+          {playing ? (
+            <iframe
+              key={station.id}
+              src={`https://www.youtube-nocookie.com/embed/${station.id}?autoplay=1&rel=0&modestbranding=1`}
+              title={`${station.name} live stream`}
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <Poster
+              type="button"
+              $color={station.color}
+              onClick={() => {
+                setPlaying(true)
+                trackMusicEvent('play', station.name)
+              }}
+              aria-label={`Play ${station.name}: ${station.description}`}
+            >
+              <span className="emoji" aria-hidden="true">
+                {station.emoji}
+              </span>
+              <strong>{station.name}</strong>
+              <span>{station.description}</span>
+              <span className="play" aria-hidden="true">
+                ▶ Play
+              </span>
+            </Poster>
+          )}
+        </Screen>
 
-      <Screen>
-        {playing ? (
-          <iframe
-            key={station.id}
-            src={`https://www.youtube-nocookie.com/embed/${station.id}?autoplay=1&rel=0&modestbranding=1`}
-            title={`${station.name} live stream`}
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen
-          />
-        ) : (
-          <Poster
-            type="button"
-            onClick={() => {
-              setPlaying(true)
-              trackMusicEvent('play', station.name)
-            }}
-            style={{ background: `linear-gradient(135deg, ${station.colors[0]}, ${station.colors[1]})` }}
-            aria-label={`Play ${station.name}`}
-          >
-            <span aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z" />
-              </svg>
-            </span>
-            <strong>{station.name}</strong>
-            <small>{station.description}</small>
-          </Poster>
-        )}
-      </Screen>
+        <Stations aria-label="Stations">
+          {stations.map((s) => (
+            <li key={s.id}>
+              <Avatar
+                type="button"
+                $color={s.color}
+                $active={s.id === station.id}
+                aria-pressed={s.id === station.id}
+                onClick={() => choose(s)}
+                title={s.description}
+              >
+                <span aria-hidden="true">{s.emoji}</span>
+                {s.name}
+              </Avatar>
+            </li>
+          ))}
+        </Stations>
 
-      <Stations aria-label="Stations">
-        {stations.map((s) => (
-          <li key={s.id}>
-            <Chip type="button" $active={s.id === station.id} aria-pressed={s.id === station.id} onClick={() => choose(s)} title={s.description}>
-              {s.name}
-            </Chip>
-          </li>
-        ))}
-      </Stations>
-
-      <Note>Streams by Lofi Girl on YouTube. Music keeps playing while the timer runs.</Note>
-    </Panel>
+        <Note>Streams by Lofi Girl on YouTube. Music keeps playing while the timer runs.</Note>
+      </Body>
+    </Window>
   )
 }
 

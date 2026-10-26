@@ -7,8 +7,9 @@ import Logo from './Logo'
 
 const Wrapper = styled.footer`
   margin-top: auto;
-  border-top: 1px solid ${({ theme }) => theme.colors.surface.border};
-  background: rgba(0, 0, 0, 0.18);
+  border-top: ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.colors.bg.deep};
+  color: ${({ theme }) => theme.colors.onBg.primary};
 `
 
 const Inner = styled.div`
@@ -39,13 +40,16 @@ const Brand = styled.div`
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 1.05rem;
+    font-family: ${({ theme }) => theme.fonts.display};
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
   }
 
   p {
     max-width: 320px;
     font-size: ${({ theme }) => theme.fontSizes.sm};
-    color: ${({ theme }) => theme.colors.text.secondary};
+    color: ${({ theme }) => theme.colors.onBg.secondary};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
@@ -57,10 +61,10 @@ const Column = styled.div`
   h2 {
     margin-bottom: 10px;
     font-size: ${({ theme }) => theme.fontSizes.xs};
-    font-weight: 600;
+    font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: ${({ theme }) => theme.colors.text.muted};
+    color: ${({ theme }) => theme.colors.accent.primary};
   }
 
   ul {
@@ -72,10 +76,12 @@ const Column = styled.div`
 
   a {
     font-size: ${({ theme }) => theme.fontSizes.sm};
-    color: ${({ theme }) => theme.colors.text.secondary};
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.onBg.secondary};
 
     &:hover {
-      color: ${({ theme }) => theme.colors.text.primary};
+      color: ${({ theme }) => theme.colors.onBg.primary};
+      text-decoration: underline;
     }
   }
 `
@@ -97,7 +103,7 @@ const Bottom = styled.div`
   justify-content: space-between;
   gap: 8px;
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.text.muted};
+  color: ${({ theme }) => theme.colors.onBg.secondary};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 8px 16px calc(24px + env(safe-area-inset-bottom));

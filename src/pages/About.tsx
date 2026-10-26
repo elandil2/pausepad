@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import SEO from '../components/SEO'
-import { Card, Eyebrow, Lead, Page, PageHeader, PageTitle, PrimaryLink, Prose, SecondaryAnchor } from '../components/Layout/Page'
+import { Card, Eyebrow, Lead, Page, PageHeader, PageTitle, PrimaryLink, Prose, SecondaryAnchor, cardStyles } from '../components/Layout/Page'
 import { SUPPORT_URL } from '../config/site'
 
 const Actions = styled.div`
@@ -12,8 +12,18 @@ const Actions = styled.div`
   margin-top: 28px;
 `
 
+const Body = styled(Prose)`
+  ${cardStyles}
+  padding: 32px 36px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 22px 18px;
+  }
+`
+
 const Support = styled(Card)`
-  margin-top: 40px;
+  margin-top: 28px;
+  background: ${({ theme }) => theme.colors.accent.primary};
 
   h2 {
     font-size: 1.2rem;
@@ -35,11 +45,11 @@ const About: React.FC = () => (
     <Page $narrow>
       <PageHeader>
         <Eyebrow>About</Eyebrow>
-        <PageTitle>A calm place to get work done</PageTitle>
+        <PageTitle>A calm place to get work done ✨</PageTitle>
         <Lead>PausePad is a free Pomodoro timer for studying and deep work, built to stay out of your way.</Lead>
       </PageHeader>
 
-      <Prose>
+      <Body>
         <p>
           Most productivity apps ask you to sign up, set up projects and learn a new system before you can do anything.
           PausePad does the opposite: open the page, write down what you are working on, and press Start.
@@ -68,7 +78,7 @@ const About: React.FC = () => (
           Your tasks, settings and stats never leave your device. There are no accounts and no ads. See the{' '}
           <Link to="/privacy">privacy policy</Link> for details.
         </p>
-      </Prose>
+      </Body>
 
       <Support>
         <h2>Support PausePad</h2>

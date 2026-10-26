@@ -1,38 +1,49 @@
+// Playful "sticker" look: purple canvas, white cards with a thick ink outline and a hard offset shadow.
+const ink = '#16132b'
+
 export const theme = {
   colors: {
+    ink,
     bg: {
-      primary: '#0c0d16',
-      secondary: '#13141f',
-      elevated: '#191a28',
+      primary: '#6b5bf0',
+      deep: '#5546d6',
+    },
+    // Text that sits directly on the purple canvas
+    onBg: {
+      primary: '#ffffff',
+      secondary: 'rgba(255, 255, 255, 0.82)',
     },
     surface: {
-      base: 'rgba(255, 255, 255, 0.04)',
-      raised: 'rgba(255, 255, 255, 0.07)',
-      hover: 'rgba(255, 255, 255, 0.1)',
-      border: 'rgba(255, 255, 255, 0.09)',
-      borderStrong: 'rgba(255, 255, 255, 0.16)',
+      base: '#ffffff',
+      tint: '#f1efff',
+      raised: '#f1efff',
+      hover: '#e6e1ff',
+      border: ink,
+      borderSoft: '#d9d4f5',
     },
+    // Text inside cards
     text: {
-      primary: '#f4f4f8',
-      secondary: '#b3b5c8',
-      muted: '#8a8ca3',
+      primary: ink,
+      secondary: '#4b4669',
+      muted: '#7c7799',
     },
     accent: {
-      primary: '#ff6b5b',
-      primaryHover: '#ff7f71',
-      success: '#34d399',
-      error: '#f87171',
+      primary: '#ffcf33',
+      primaryHover: '#ffd84f',
+      success: '#3ecf72',
+      error: '#ef4444',
     },
     mode: {
-      focus: '#ff6b5b',
-      longFocus: '#ff9f43',
-      shortBreak: '#38bdf8',
-      longBreak: '#34d399',
+      focus: '#ff7a59',
+      shortBreak: '#58d68d',
+      longBreak: '#4fb6ff',
+      longFocus: '#ff6fb1',
     },
   },
 
   fonts: {
-    primary: `'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`,
+    display: `'Outfit', 'DM Sans', system-ui, sans-serif`,
+    body: `'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif`,
   },
 
   fontSizes: {
@@ -65,19 +76,24 @@ export const theme = {
   },
 
   radius: {
-    sm: '8px',
-    md: '12px',
-    lg: '16px',
-    xl: '24px',
+    sm: '10px',
+    md: '14px',
+    lg: '20px',
+    xl: '28px',
     full: '9999px',
   },
 
+  border: `3px solid ${ink}`,
+  borderThin: `2px solid ${ink}`,
+
   shadows: {
-    card: '0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px rgba(0, 0, 0, 0.28)',
+    card: `6px 6px 0 ${ink}`,
+    small: `3px 3px 0 ${ink}`,
+    pressed: `1px 1px 0 ${ink}`,
   },
 
   transitions: {
-    fast: '0.15s ease',
+    fast: '0.12s ease',
     normal: '0.25s ease',
   },
 
@@ -89,9 +105,9 @@ export const theme = {
   },
 
   layout: {
-    maxWidth: '1120px',
-    proseWidth: '720px',
-    headerHeight: '64px',
+    maxWidth: '1160px',
+    proseWidth: '760px',
+    headerHeight: '72px',
   },
 } as const
 

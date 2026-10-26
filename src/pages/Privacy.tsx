@@ -1,6 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
 import SEO from '../components/SEO'
-import { Eyebrow, Lead, Page, PageHeader, PageTitle, Prose } from '../components/Layout/Page'
+import { Eyebrow, Lead, Page, PageHeader, PageTitle, Prose, cardStyles } from '../components/Layout/Page'
+
+const Body = styled(Prose)`
+  ${cardStyles}
+  padding: 32px 36px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 22px 18px;
+  }
+`
 
 const Privacy: React.FC = () => (
   <>
@@ -16,7 +26,7 @@ const Privacy: React.FC = () => (
         <Lead>Short version: your tasks and settings stay on your device. We only collect anonymous usage statistics.</Lead>
       </PageHeader>
 
-      <Prose>
+      <Body>
         <h2>Data stored on your device</h2>
         <p>
           Your tasks, timer settings, selected music station and daily focus statistics are saved in your browser's
@@ -70,7 +80,7 @@ const Privacy: React.FC = () => (
         <p>
           <em>Last updated: October 26, 2026</em>
         </p>
-      </Prose>
+      </Body>
     </Page>
   </>
 )
