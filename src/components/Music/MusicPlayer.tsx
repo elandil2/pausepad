@@ -14,11 +14,14 @@ interface Station {
 
 // 24/7 live streams from Lofi Girl. IDs verified via YouTube oEmbed.
 const stations: Station[] = [
-  { id: 'jfKfPfyJRdk', name: 'Lofi', description: 'Beats to relax / study to', emoji: '🎧', color: '#ff9f59' },
-  { id: 'HuFYqnbVbzY', name: 'Jazz', description: 'Smooth jazz beats', emoji: '🎷', color: '#ffcf33' },
-  { id: '28KRPhVzCus', name: 'Sleepy', description: 'Slow, calm beats', emoji: '😴', color: '#4fb6ff' },
-  { id: 'SXySxLgCV-8', name: 'Summer', description: 'Warm, sunny beats', emoji: '☀️', color: '#58d68d' },
-  { id: '4xDzrJKXOOY', name: 'Synth', description: 'Retro synthwave', emoji: '🌆', color: '#ff6fb1' },
+  { id: 'rFZHOHl-L8A', name: 'Lofi', description: 'Beats to relax / study to', emoji: '📚', color: '#ff9f59' },
+  { id: '3PFJ9SETS4M', name: 'House', description: 'Lounge music to vibe to', emoji: '🌅', color: '#ffcf33' },
+  { id: '0muHFBSiybw', name: 'Summer', description: 'Music for a better mood', emoji: '☀️', color: '#58d68d' },
+  { id: '4xDzrJKXOOY', name: 'Synth', description: 'Synthwave to chill to', emoji: '🌆', color: '#ff6fb1' },
+  { id: 'JD-kMIpDfnY', name: 'Sleepy', description: 'Beats to sleep / chill to', emoji: '💤', color: '#4fb6ff' },
+  { id: 'nI725iVsyoQ', name: 'Dreamy', description: 'Calm ambient for deep rest', emoji: '🌙', color: '#c4b5fd' },
+  { id: 'GSfT7H87zq4', name: 'Space', description: 'Deep space ambient', emoji: '🌌', color: '#7dd3fc' },
+  { id: '0sfDth4lMLc', name: 'Spooky', description: 'Halloween ambience', emoji: '🎃', color: '#fb923c' },
 ]
 
 const STORAGE_KEY = 'pausepad-station'
@@ -91,9 +94,10 @@ const Poster = styled.button<{ $color: string }>`
 
 const Stations = styled.ul`
   list-style: none;
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 6px;
+  justify-items: center;
 `
 
 const Avatar = styled.button<{ $color: string; $active: boolean }>`

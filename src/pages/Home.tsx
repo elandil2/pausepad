@@ -307,7 +307,7 @@ const steps = [
 const features = [
   { icon: '⏱️', color: '#ff7a59', title: 'Accurate timer', text: 'Keeps exact time even in a background tab, and shows the countdown in the browser tab title.' },
   { icon: '✅', color: '#58d68d', title: 'Simple task list', text: 'Plan what to work on next. Tasks are saved in your browser, no account needed.' },
-  { icon: '🎧', color: '#ff6fb1', title: 'Lofi focus music', text: 'Pick a 24/7 lofi, jazz or synthwave stream and keep it playing while you work.' },
+  { icon: '🎧', color: '#ff6fb1', title: 'Lofi focus music', text: 'Pick from 8 live streams, from lofi and house to synthwave and space ambient, and keep it playing while you work.' },
   { icon: '⚙️', color: '#4fb6ff', title: 'Custom durations', text: 'Change the length of pomodoros and breaks, or switch to a 50-minute deep focus session.' },
   { icon: '🔔', color: '#ffcf33', title: 'Sound & notifications', text: 'A gentle chime and a desktop notification tell you when it is time to switch.' },
   { icon: '🔒', color: '#c4b5fd', title: 'Free & private', text: 'No sign-up, no ads, no tracking of your tasks. Everything stays on your device.' },
