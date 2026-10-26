@@ -1,104 +1,14 @@
 import React from 'react'
-import { motion } from 'framer-motion'
-import styled from 'styled-components'
-import GlassCard from '../../../components/UI/GlassCard'
-import SEO from '../../../components/SEO'
-import { Link } from 'react-router-dom'
-
-const BlogContainer = styled(motion.div)`
-  min-height: 100vh;
-  padding: ${({ theme }) => theme.spacing.xl};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.spacing.lg};
-  }
-`
-
-const ContentWrapper = styled.div`
-  max-width: 800px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xl};
-`
-
-const PageTitle = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes['4xl']};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  background: ${({ theme }) => theme.gradients.primary};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  text-align: center;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSizes['3xl']};
-  }
-`
-
-const BlogCard = styled(GlassCard)`
-  padding: ${({ theme }) => theme.spacing.xl};
-  text-align: left;
-
-  h2 {
-    font-size: ${({ theme }) => theme.fontSizes['2xl']};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    color: ${({ theme }) => theme.colors.text.primary};
-  }
-
-  h3 {
-    font-size: ${({ theme }) => theme.fontSizes.xl};
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
-    color: ${({ theme }) => theme.colors.text.primary};
-  }
-
-  p {
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    line-height: 1.6;
-    color: ${({ theme }) => theme.colors.text.secondary};
-  }
-
-  ul {
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    padding-left: ${({ theme }) => theme.spacing.lg};
-
-    li {
-      margin-bottom: ${({ theme }) => theme.spacing.sm};
-      color: ${({ theme }) => theme.colors.text.secondary};
-    }
-  }
-`
-
-const BackLink = styled(Link)`
-  display: inline-block;
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  color: ${({ theme }) => theme.colors.accent.primary};
-  text-decoration: none;
-  font-weight: 500;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`
+import { BackLink, BlogCard, BlogContainer, ContentWrapper, PageTitle, PostSEO } from '../../../components/Article'
 
 const PomodoroChinese: React.FC = () => {
   return (
     <>
-      <SEO
+      <PostSEO
         title="番茄工作法完全指南 - 高考中考考研时间管理"
         description="番茄工作法完整教程。高效学习时间管理方法，专为高考、中考、考研学生设计。科学的时间管理技巧和学习方法。"
-        canonical="/blog/zh/pomodoro-technique-guide"
       />
-      <BlogContainer
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
-      >
+      <BlogContainer>
         <ContentWrapper>
           <BackLink to="/blog">返回博客 ←</BackLink>
 

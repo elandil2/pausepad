@@ -1,220 +1,166 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import Logo from './Logo'
 
-const HeaderContainer = styled.header`
-  position: fixed;
+const Bar = styled.header`
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 1000;
-  background: rgba(15, 15, 35, 0.9);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
-
-  @media (max-width: 768px) {
-    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  }
-
-  @media (max-width: 480px) {
-    padding: 10px ${({ theme }) => theme.spacing.sm};
-  }
+  background: rgba(12, 13, 22, 0.8);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.surface.border};
 `
 
-const HeaderContent = styled.div`
-  max-width: 1200px;
+const Inner = styled.div`
+  max-width: ${({ theme }) => theme.layout.maxWidth};
+  height: ${({ theme }) => theme.layout.headerHeight};
   margin: 0 auto;
+  padding: 0 20px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-`
+  gap: 16px;
 
-const Logo = styled(Link)`
-  font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  background: ${({ theme }) => theme.gradients.primary};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  white-space: nowrap;
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.fontSizes.xl};
-    gap: 6px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-    gap: 4px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    height: 56px;
+    padding: 0 16px;
   }
 `
 
-const Navigation = styled.nav`
+const Brand = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: ${({ theme }) => theme.colors.text.primary};
+`
+
+const DesktopNav = styled.nav`
   display: flex;
-  gap: ${({ theme }) => theme.spacing.lg};
-  
-  @media (max-width: 768px) {
+  align-items: center;
+  gap: 4px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: none;
   }
 `
 
-const NavLink = styled(Link)<{ $active: boolean }>`
-  color: ${({ theme, $active }) => 
-    $active ? theme.colors.text.primary : theme.colors.text.secondary};
-  text-decoration: none;
-  font-weight: ${({ theme, $active }) => 
-    $active ? theme.fontWeights.semibold : theme.fontWeights.medium};
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  transition: ${({ theme }) => theme.transitions.fast};
-  position: relative;
-  
+const Item = styled(NavLink)`
+  padding: 8px 14px;
+  border-radius: ${({ theme }) => theme.radius.full};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.text.secondary};
+  transition:
+    background ${({ theme }) => theme.transitions.fast},
+    color ${({ theme }) => theme.transitions.fast};
+
   &:hover {
     color: ${({ theme }) => theme.colors.text.primary};
-    background: rgba(255, 255, 255, 0.1);
+    background: ${({ theme }) => theme.colors.surface.raised};
   }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-    font-size: ${({ theme }) => theme.fontSizes.sm};
+
+  &.active {
+    color: ${({ theme }) => theme.colors.text.primary};
+    background: ${({ theme }) => theme.colors.surface.hover};
   }
 `
 
-const ActiveIndicator = styled(motion.div)`
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: ${({ theme }) => theme.gradients.primary};
-  border-radius: 1px;
-`
-
-const MobileMenuButton = styled.button`
+const MenuButton = styled.button`
   display: none;
-  background: none;
-  border: none;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  border-radius: ${({ theme }) => theme.radius.md};
+  align-items: center;
+  justify-content: center;
   color: ${({ theme }) => theme.colors.text.primary};
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.sm};
-  min-height: 44px;
-  min-width: 44px;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  transition: ${({ theme }) => theme.transitions.fast};
-  
+
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: ${({ theme }) => theme.colors.surface.raised};
   }
-  
-  @media (max-width: 768px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    display: inline-flex;
   }
 `
 
-const MobileMenu = styled(motion.div)<{ $isOpen: boolean }>`
+const MobilePanel = styled.nav`
   display: none;
-  
-  @media (max-width: 768px) {
-    display: ${({ $isOpen }) => $isOpen ? 'block' : 'none'};
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(15, 15, 35, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: ${({ theme }) => theme.spacing.md};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 12px 16px;
+    border-top: 1px solid ${({ theme }) => theme.colors.surface.border};
+
+    ${Item} {
+      padding: 12px 14px;
+      border-radius: ${({ theme }) => theme.radius.md};
+      font-size: ${({ theme }) => theme.fontSizes.base};
+    }
   }
 `
 
-const MobileNavigation = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.md};
-`
+const navItems = [
+  { to: '/', label: 'Timer', end: true },
+  { to: '/blog', label: 'Blog', end: false },
+  { to: '/about', label: 'About', end: true },
+]
 
 const Header: React.FC = () => {
   const location = useLocation()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
 
-  const navItems = [
-    { path: '/timer', label: 'Timer', icon: '\u{1F345}' },
-    { path: '/about', label: 'About', icon: '\u2139\uFE0F' },
-    { path: '/blog', label: 'Blog', icon: '\u{1F4DD}' },
-    { path: '/privacy', label: 'Privacy', icon: '\u{1F512}' },
-  ]
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
 
   return (
-    <HeaderContainer>
-      <HeaderContent>
-        <Logo to="/timer">{'\u{1F345}'} PausePad</Logo>
+    <Bar>
+      <Inner>
+        <Brand to="/" aria-label="PausePad home">
+          <Logo />
+          PausePad
+        </Brand>
 
-        <Navigation>
-          {navItems.map((item) => {
-            const isActive = location.pathname === item.path
-            return (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                $active={isActive}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <span className="hide-mobile">{item.icon}</span> {item.label}
-                {isActive && (
-                  <ActiveIndicator
-                    layoutId="activeIndicator"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </NavLink>
-            )
-          })}
-        </Navigation>
+        <DesktopNav aria-label="Main">
+          {navItems.map((item) => (
+            <Item key={item.to} to={item.to} end={item.end}>
+              {item.label}
+            </Item>
+          ))}
+        </DesktopNav>
 
-        <MobileMenuButton onClick={toggleMobileMenu}>
-          {isMobileMenuOpen ? '\u00D7' : '\u2630'}
-        </MobileMenuButton>
-      </HeaderContent>
+        <MenuButton
+          type="button"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen((value) => !value)}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+          </svg>
+        </MenuButton>
+      </Inner>
 
-      <MobileMenu
-        $isOpen={isMobileMenuOpen}
-        initial={false}
-        animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : -10 }}
-        transition={{ duration: 0.2 }}
-      >
-        <MobileNavigation>
-          {navItems.map((item) => {
-            const isActive = location.pathname === item.path
-            return (
-              <NavLink
-                key={`mobile-${item.path}`}
-                to={item.path}
-                $active={isActive}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.icon} {item.label}
-              </NavLink>
-            )
-          })}
-        </MobileNavigation>
-      </MobileMenu>
-    </HeaderContainer>
+      {open && (
+        <MobilePanel id="mobile-nav" aria-label="Main">
+          {navItems.map((item) => (
+            <Item key={item.to} to={item.to} end={item.end}>
+              {item.label}
+            </Item>
+          ))}
+        </MobilePanel>
+      )}
+    </Bar>
   )
 }
 
 export default Header
-

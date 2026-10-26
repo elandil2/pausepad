@@ -3,84 +3,63 @@ import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import { VitePWA } from 'vite-plugin-pwa'
 
-export default defineConfig({
-  base: '/', // Root path for Vercel deployment
+export default defineConfig(({ isSsrBuild }) => ({
+  base: '/',
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      includeAssets: ['favicon.svg', 'favicon.ico', 'icons/apple-touch-icon.png'],
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/api\.spotify\.com\/.*/i,
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'spotify-api-cache',
-              expiration: {
-                maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 // 24 hours
-              }
-            }
-          }
-        ]
+        // Only cache static assets. HTML always comes from the network so every page shows its own
+        // prerendered content and a dead domain can never be "kept alive" by a stale cache.
+        globPatterns: ['**/*.{js,css,ico,png,svg,woff2}'],
+        navigateFallback: null,
+        cleanupOutdatedCaches: true,
       },
       manifest: {
-        name: 'PausePad - Pomodoro Timer',
+        name: 'PausePad – Pomodoro Timer',
         short_name: 'PausePad',
-        description: 'Modern Pomodoro timer with music and task management',
-        theme_color: '#667eea',
-        background_color: '#1a1a2e',
+        description: 'Free Pomodoro timer with tasks and focus music',
+        theme_color: '#0c0d16',
+        background_color: '#0c0d16',
         display: 'standalone',
-        orientation: 'portrait',
-        scope: '/pausepad/',
-        start_url: '/pausepad/',
+        scope: '/',
+        start_url: '/',
         icons: [
-          {
-            src: '/icons/icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: '/icons/icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          }
-        ]
-      }
-    })
+          { src: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+          { src: '/icons/icon-512x512-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+        ],
+      },
+    }),
   ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-      '@/components': resolve(__dirname, 'src/components'),
-      '@/hooks': resolve(__dirname, 'src/hooks'),
-      '@/services': resolve(__dirname, 'src/services'),
-      '@/stores': resolve(__dirname, 'src/stores'),
-      '@/types': resolve(__dirname, 'src/types'),
-      '@/utils': resolve(__dirname, 'src/utils'),
-      '@/styles': resolve(__dirname, 'src/styles')
-    }
+    },
+  },
+  ssr: {
+    // CommonJS packages with named exports that Node's ESM loader can't resolve on its own.
+    noExternal: ['react-helmet-async', 'styled-components'],
   },
   server: {
     port: 5173,
-    host: true
+    host: true,
   },
   build: {
-    target: 'esnext',
+    target: 'es2020',
     outDir: 'dist',
-    assetsDir: 'assets',
     sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          ui: ['styled-components', 'framer-motion'],
-          charts: ['chart.js', 'react-chartjs-2'],
-          audio: ['howler']
-        }
-      }
-    }
-  }
-})
+    rollupOptions: isSsrBuild
+      ? undefined
+      : {
+          output: {
+            manualChunks: {
+              vendor: ['react', 'react-dom', 'react-router-dom'],
+              ui: ['styled-components', 'react-helmet-async'],
+            },
+          },
+        },
+  },
+}))

@@ -1,105 +1,62 @@
-# PausePad - Pomodoro Timer
+# PausePad – Pomodoro Timer
 
-A modern Pomodoro timer with integrated lofi music streaming and task management. Built with React, TypeScript, and deployed on Vercel.
+A free, distraction-free Pomodoro timer with a task list and lofi focus music. No sign-up, no ads.
 
-**Live Site:** https://www.pausepad.com
+**Live site:** https://www.pausepad.com
 
 ## Features
 
-### Timer Functionality
-- Multiple timer modes: Focus (25min), Long Focus (45min), Short Break (5min), Long Break (15min)
-- Visual circular progress indicator
-- Audio notifications when sessions complete
-- Session counting and tracking
+- Pomodoro, short break, long break and 50-minute deep focus modes
+- Custom durations and optional auto-start (saved in the browser)
+- Accurate in background tabs: remaining time is derived from the clock, not from interval ticks
+- Countdown in the tab title, sound chime and desktop notifications
+- Task list and daily focus stats stored locally
+- Lofi live streams that only load when you press Play
+- Blog with Pomodoro guides in 9 languages
+- Installable PWA
 
-### Music Integration
-- Built-in YouTube lofi music player
-- Curated focus playlists
-- Minimizable player interface
+## Stack
 
-### Task Management
-- Add and track tasks during focus sessions
-- Task completion tracking
-- Local storage persistence
+React 18 + TypeScript, Vite, styled-components, React Router, react-helmet-async, deployed on Vercel.
 
-### Design
-- Glassmorphic UI with gradient backgrounds
-- Smooth animations with Framer Motion
-- Fully responsive (mobile, tablet, desktop)
-- Progressive Web App (PWA) support
-
-## Technology Stack
-
-- React 18 with TypeScript
-- Vite (build tool)
-- Styled Components
-- Framer Motion (animations)
-- React Router
-- Google Analytics 4
-- Vite PWA Plugin
-- Vercel (deployment)
+Every route is **prerendered to static HTML at build time** (`src/entry-server.tsx` + `scripts/prerender.mjs`),
+so search engines and link previews get real content, titles, canonical URLs, hreflang and JSON-LD.
+The same step generates `sitemap.xml` and `robots.txt`.
 
 ## Development
 
-### Prerequisites
-- Node.js 18+
-- npm
-
-### Setup
 ```bash
-# Clone repository
-git clone https://github.com/elandil2/pausepad.git
-cd pausepad
-
-# Install dependencies
 npm install
-
-# Start dev server
-npm run dev
-
-# Build for production
-npm run build
+npm run dev       # dev server on http://localhost:5173
+npm run build     # type-check, client build, SSR build, prerender into dist/
+npx serve dist    # preview the production build with clean URLs
 ```
 
-### SEO / Platform Audits
-```bash
-# Production sitemap + route/status audit
-npm run audit:seo
+## Project layout
 
-# Local preview audit (run preview server first)
-npm run audit:seo:local
-```
+| Path | What it is |
+| --- | --- |
+| `src/routes.tsx` | All routes and their sitemap priority |
+| `src/content/posts.ts` | Blog post metadata (titles, dates, languages, translations) |
+| `src/config/site.ts` | Public site URL (override with the `VITE_SITE_URL` env var) |
+| `src/components/SEO.tsx` | Title, meta, canonical, Open Graph, hreflang, JSON-LD |
+| `src/components/Article.tsx` | Shared blog post layout |
+| `src/hooks/usePomodoro.ts` | Timer logic |
+| `scripts/generate-assets.py` | Regenerates favicon, PWA icons and `og-image.png` (needs Pillow) |
 
-Detailed execution checklist for ongoing traffic recovery:
-- `PHASE_2_5_RUNBOOK.md`
-- KPI tracking sheet: `reports/kpi-tracker.csv`
+## Adding a blog post
 
-## Configuration
+1. Create the page in `src/pages/blog/` using the components from `src/components/Article.tsx`.
+2. Add its metadata to `src/content/posts.ts` (set `translationGroup` for translations).
+3. Add the route to `src/routes.tsx`. The blog index, footer, sitemap and hreflang update automatically.
 
-### Timer Durations
-Edit timer durations in `src/types/timer.ts` if needed.
+## Analytics
 
-### Analytics
-Google Analytics 4 is configured. Measurement ID: `G-FK0RKNZG4G`
-
-### Music Playlists
-Add or modify YouTube streams in `src/components/Music/YouTubePlayer.tsx`
-
-## SEO
-
-The site includes:
-- Comprehensive meta tags
-- JSON-LD structured data
-- Sitemap (`/sitemap.xml`)
-- Robots.txt
-- Multilingual hreflang tags
-- Open Graph & Twitter Card tags
+- **Vercel Web Analytics + Speed Insights** (free on the Hobby plan): enable both in the Vercel project's
+  *Analytics* and *Speed Insights* tabs.
+- **Google Analytics 4** (`G-FK0RKNZG4G`): loaded in `index.html`; page views are sent on every route change.
+- **Google Search Console**: verified with `public/google701882e8b3fd3bb9.html`; submit `/sitemap.xml`.
 
 ## License
 
-MIT License
-
-## Acknowledgments
-
-- Pomodoro Technique by Francesco Cirillo
-- Lofi music community
+MIT

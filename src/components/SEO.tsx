@@ -1,166 +1,111 @@
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL, absoluteUrl } from '../config/site'
+
+const OG_LOCALES: Record<string, string> = {
+  en: 'en_US',
+  tr: 'tr_TR',
+  es: 'es_ES',
+  it: 'it_IT',
+  ru: 'ru_RU',
+  hi: 'hi_IN',
+  zh: 'zh_CN',
+  ar: 'ar_AR',
+  ur: 'ur_PK',
+}
 
 interface SEOProps {
-  title?: string
-  description?: string
-  canonical?: string
-  ogImage?: string
-  ogType?: string
-  twitterCard?: string
-  keywords?: string
+  title: string
+  description: string
+  /** Path of this page, e.g. "/blog". Used for canonical and og:url. */
+  path: string
+  image?: string
+  type?: 'website' | 'article'
   robots?: string
-  schemaType?: 'WebApplication' | 'Article' | 'WebPage'
-  articleData?: {
-    author?: string
-    publishedTime?: string
-    modifiedTime?: string
+  lang?: string
+  dir?: 'ltr' | 'rtl'
+  /** hreflang alternates for translated versions of this page. */
+  alternates?: { lang: string; path: string }[]
+  article?: {
+    published: string
+    modified?: string
     section?: string
-    tags?: string[]
   }
+  jsonLd?: object[]
 }
 
 const SEO: React.FC<SEOProps> = ({
-  title = "PausePad - Free Online Pomodoro Timer with Music",
-  description = "Free online Pomodoro timer with lofi music, task management, and focus tracking. Boost productivity with 25-minute work sessions and relaxing breaks. Perfect for studying and work.",
-  canonical,
-  ogImage = "https://pausepad.com/og-image.png",
-  ogType = "website",
-  twitterCard = "summary_large_image",
-  keywords = "pomodoro timer, focus timer, study timer, productivity timer, task manager",
-  robots = "index, follow, max-image-preview:large",
-  schemaType = 'WebApplication',
-  articleData
+  title,
+  description,
+  path,
+  image = DEFAULT_OG_IMAGE,
+  type = 'website',
+  robots = 'index, follow, max-image-preview:large',
+  lang = 'en',
+  dir = 'ltr',
+  alternates,
+  article,
+  jsonLd = [],
 }) => {
-  const siteUrl = "https://www.pausepad.com"
-  const fullCanonical = canonical ? `${siteUrl}${canonical}` : undefined
+  const url = absoluteUrl(path)
+  const english = alternates?.find((alt) => alt.lang === 'en')
 
-  // Generate structured data based on schema type
-  const generateStructuredData = () => {
-    const baseSchema = {
-      "@context": "https://schema.org",
-      "@type": schemaType,
-      "name": "PausePad",
-      "url": fullCanonical || siteUrl,
-      "description": description,
-      "image": ogImage
-    }
-
-    if (schemaType === 'WebApplication') {
-      return {
-        ...baseSchema,
-        "@type": "WebApplication",
-        "applicationCategory": "ProductivityApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "featureList": [
-          "Pomodoro Timer",
-          "Task Management",
-          "Lofi Music Player",
-          "Focus Tracking",
-          "Break Reminders"
-        ],
-        "browserRequirements": "Requires JavaScript. Requires HTML5."
-      }
-    }
-
-    if (schemaType === 'Article' && articleData) {
-      return {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": title,
-        "description": description,
-        "image": ogImage,
-        "author": {
-          "@type": "Organization",
-          "name": articleData.author || "PausePad"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "PausePad",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.pausepad.com/logo.png"
-          }
-        },
-        "datePublished": articleData.publishedTime,
-        "dateModified": articleData.modifiedTime || articleData.publishedTime,
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": fullCanonical || siteUrl
-        },
-        "articleSection": articleData.section,
-        "keywords": articleData.tags?.join(', ')
-      }
-    }
-
-    return baseSchema
+  const articleSchema = article && {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    image,
+    inLanguage: lang,
+    datePublished: article.published,
+    dateModified: article.modified || article.published,
+    articleSection: article.section,
+    mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/icons/icon-512x512.png` },
+    },
   }
 
-  const structuredData = generateStructuredData()
+  const schemas = articleSchema ? [articleSchema, ...jsonLd] : jsonLd
 
   return (
     <Helmet>
+      <html lang={lang} dir={dir} />
       <title>{title}</title>
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
-      {fullCanonical && <link rel="canonical" href={fullCanonical} />}
+      <meta name="robots" content={robots} />
+      {!robots.includes('noindex') && <link rel="canonical" href={url} />}
 
-      {/* Open Graph */}
+      {alternates?.map((alt) => (
+        <link key={alt.lang} rel="alternate" hrefLang={alt.lang} href={absoluteUrl(alt.path)} />
+      ))}
+      {english && <link rel="alternate" hrefLang="x-default" href={absoluteUrl(english.path)} />}
+
+      <meta property="og:type" content={type} />
+      <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage} />
-      {fullCanonical && <meta property="og:url" content={fullCanonical} />}
-      <meta property="og:type" content={ogType} />
-      <meta property="og:site_name" content="PausePad" />
-      <meta property="og:locale" content="en_US" />
+      <meta property="og:url" content={url} />
+      <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:locale" content={OG_LOCALES[lang] || 'en_US'} />
+      {article && <meta property="article:published_time" content={article.published} />}
+      {article && <meta property="article:modified_time" content={article.modified || article.published} />}
 
-      {/* Article specific OG tags */}
-      {articleData && (
-        <>
-          <meta property="article:published_time" content={articleData.publishedTime} />
-          <meta property="article:modified_time" content={articleData.modifiedTime || articleData.publishedTime} />
-          <meta property="article:author" content={articleData.author || "PausePad"} />
-          {articleData.section && <meta property="article:section" content={articleData.section} />}
-          {articleData.tags?.map((tag, index) => (
-            <meta key={index} property="article:tag" content={tag} />
-          ))}
-        </>
-      )}
-
-      {/* Twitter */}
-      <meta name="twitter:card" content={twitterCard} />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
-      <meta name="twitter:image:alt" content={title} />
+      <meta name="twitter:image" content={image} />
 
-      {/* Additional SEO */}
-      <meta name="robots" content={robots} />
-      <meta name="theme-color" content="#667eea" />
-
-      {/* Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
-      </script>
-
-      {/* Additional Organization Schema */}
-      {schemaType === 'WebApplication' && (
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "PausePad",
-            "url": "https://www.pausepad.com",
-            "logo": "https://www.pausepad.com/logo.png",
-            "sameAs": []
-          })}
+      {schemas.map((schema, index) => (
+        <script key={index} type="application/ld+json">
+          {JSON.stringify(schema)}
         </script>
-      )}
+      ))}
     </Helmet>
   )
 }

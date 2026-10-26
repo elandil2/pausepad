@@ -1,208 +1,87 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import GlassCard from '../components/UI/GlassCard'
 import SEO from '../components/SEO'
+import { Card, Eyebrow, Lead, Page, PageHeader, PageTitle, PrimaryLink, Prose, SecondaryAnchor } from '../components/Layout/Page'
+import { SUPPORT_URL } from '../config/site'
 
-const AboutContainer = styled(motion.div)`
-  min-height: 100vh;
-  padding: ${({ theme }) => theme.spacing.xl};
+const Actions = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.spacing.lg};
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+`
+
+const Support = styled(Card)`
+  margin-top: 40px;
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
   }
-`
 
-const ContentWrapper = styled.div`
-  max-width: 800px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xl};
-`
-
-const PageTitle = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes['4xl']};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  background: ${({ theme }) => theme.gradients.primary};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  text-align: center;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSizes['3xl']};
-  }
-`
-
-const AboutCard = styled(GlassCard)`
-  text-align: center;
-`
-
-const AboutText = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  line-height: 1.6;
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  
   p {
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-  }
-  
-  strong {
-    color: ${({ theme }) => theme.colors.text.primary};
+    color: ${({ theme }) => theme.colors.text.secondary};
   }
 `
 
-const FeatureList = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: ${({ theme }) => theme.spacing.md};
-  margin: ${({ theme }) => theme.spacing.lg} 0;
-`
+const About: React.FC = () => (
+  <>
+    <SEO
+      title="About PausePad – a free, simple Pomodoro timer"
+      description="PausePad is a free Pomodoro timer with a task list and lofi focus music. No account, no ads: open it and start focusing."
+      path="/about"
+    />
+    <Page $narrow>
+      <PageHeader>
+        <Eyebrow>About</Eyebrow>
+        <PageTitle>A calm place to get work done</PageTitle>
+        <Lead>PausePad is a free Pomodoro timer for studying and deep work, built to stay out of your way.</Lead>
+      </PageHeader>
 
-const FeatureItem = styled.li`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  padding: ${({ theme }) => theme.spacing.sm};
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  font-size: ${({ theme }) => theme.fontSizes.base};
-  color: ${({ theme }) => theme.colors.text.secondary};
-`
+      <Prose>
+        <p>
+          Most productivity apps ask you to sign up, set up projects and learn a new system before you can do anything.
+          PausePad does the opposite: open the page, write down what you are working on, and press Start.
+        </p>
 
-const FeatureIcon = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  min-width: 30px;
-`
+        <h2>What's inside</h2>
+        <ul>
+          <li><strong>Pomodoro timer</strong> with 25-minute focus sessions, short and long breaks, and a 50-minute deep focus mode.</li>
+          <li><strong>Custom durations</strong> and optional auto-start, saved in your browser.</li>
+          <li><strong>Task list</strong> to keep the next thing you want to finish in front of you.</li>
+          <li><strong>Lofi focus music</strong> from 24/7 live streams.</li>
+          <li><strong>Sound and desktop notifications</strong> when a session ends.</li>
+          <li><strong>Daily stats</strong> that show how many pomodoros you finished today.</li>
+        </ul>
 
-const BuyMeACoffeeButton = styled.a`
-  display: inline-block;
-  margin-top: ${({ theme }) => theme.spacing.md};
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => theme.gradients.primary};
-  color: white;
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  }
-`
+        <h2>The Pomodoro technique in one paragraph</h2>
+        <p>
+          Work on one task for 25 minutes, then take a 5-minute break. After four rounds, take a longer break of 15 to
+          30 minutes. The short, fixed intervals make it easier to start, keep you from multitasking, and help you
+          notice how long work really takes. Read the{' '}
+          <Link to="/blog/pomodoro-technique-explained">complete guide</Link> to learn more.
+        </p>
 
-const ContactInfo = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.xl};
-  padding-top: ${({ theme }) => theme.spacing.lg};
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
-  color: ${({ theme }) => theme.colors.text.secondary};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-`
+        <h2>Privacy first</h2>
+        <p>
+          Your tasks, settings and stats never leave your device. There are no accounts and no ads. See the{' '}
+          <Link to="/privacy">privacy policy</Link> for details.
+        </p>
+      </Prose>
 
-const About: React.FC = () => {
-  return (
-    <>
-      <SEO
-        title="About PausePad - Modern Pomodoro Timer"
-        description="Learn about PausePad, a modern Pomodoro timer with glassmorphic design, task management, and music integration for enhanced productivity."
-        canonical="/about"
-      />
-      <AboutContainer
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
-      >
-      <ContentWrapper>
-        <PageTitle>About PausePad</PageTitle>
-        
-        <AboutCard padding="xl">
-          <AboutText>
-            <p>
-              <strong>PausePad</strong> is a cozy and modern Pomodoro timer designed to help you stay focused and productive while maintaining a healthy work-life balance.
-            </p>
-            
-            <p>
-              Built with love using React, TypeScript, and modern web technologies, PausePad combines beautiful glassmorphic design with powerful productivity features to create the perfect focus companion.
-            </p>
-            
-            <p>
-              Whether you're studying, working, or pursuing personal projects, PausePad provides the tools you need to maintain focus, track progress, and take meaningful breaks.
-            </p>
-          </AboutText>
-          
-          <FeatureList>
-            <FeatureItem>
-              <FeatureIcon>🍅</FeatureIcon>
-              <span>Customizable Pomodoro Timer</span>
-            </FeatureItem>
-            <FeatureItem>
-              <FeatureIcon>📝</FeatureIcon>
-              <span>Task Management</span>
-            </FeatureItem>
-            <FeatureItem>
-              <FeatureIcon>🎵</FeatureIcon>
-              <span>Focus Music Integration</span>
-            </FeatureItem>
-            <FeatureItem>
-              <FeatureIcon>📊</FeatureIcon>
-              <span>Progress Tracking</span>
-            </FeatureItem>
-            <FeatureItem>
-              <FeatureIcon>💾</FeatureIcon>
-              <span>Local Data Persistence</span>
-            </FeatureItem>
-            <FeatureItem>
-              <FeatureIcon>🔔</FeatureIcon>
-              <span>Smart Notifications</span>
-            </FeatureItem>
-          </FeatureList>
-          
-          <AboutText>
-            <p>
-              <strong>The Pomodoro Technique</strong> is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks.
-            </p>
-            <p>
-              This technique helps improve focus and productivity while preventing burnout.
-            </p>
-            <p>
-              <strong>I hope this helps for you.</strong>
-            </p>
-            <p>
-              If this saved you time or solved your problem, consider supporting my work:
-            </p>
-            <p>
-              <BuyMeACoffeeButton
-                href="https://buymeacoffee.com/saficengiz7"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ☕ Buy Me a Coffee
-              </BuyMeACoffeeButton>
-            </p>
-          </AboutText>
-          
-          <ContactInfo>
-            <p>Made with ❤️</p>
-            <p>Version 1.0.0 • Built with React & TypeScript</p>
-          </ContactInfo>
-        </AboutCard>
-      </ContentWrapper>
-    </AboutContainer>
-    </>
-  )
-}
+      <Support>
+        <h2>Support PausePad</h2>
+        <p>PausePad is a free side project. If it helps you focus, a coffee keeps it running and ad-free.</p>
+        <Actions>
+          <SecondaryAnchor href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">
+            ☕ Buy me a coffee
+          </SecondaryAnchor>
+          <PrimaryLink to="/">Open the timer</PrimaryLink>
+        </Actions>
+      </Support>
+    </Page>
+  </>
+)
 
 export default About

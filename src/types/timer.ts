@@ -1,6 +1,6 @@
 export type TimerMode = 'focus' | 'longFocus' | 'shortBreak' | 'longBreak'
 
-export type TimerStatus = 'idle' | 'running' | 'paused' | 'completed'
+export type TimerStatus = 'idle' | 'running' | 'paused'
 
 export interface TimerConfig {
   focusTime: number // minutes
@@ -8,8 +8,8 @@ export interface TimerConfig {
   shortBreakTime: number // minutes
   longBreakTime: number // minutes
   sessionsUntilLongBreak: number
-  autoStartBreaks: boolean
-  autoStartPomodoros: boolean
+  autoStart: boolean
+  sound: boolean
 }
 
 export interface TimerState {
@@ -17,65 +17,30 @@ export interface TimerState {
   status: TimerStatus
   timeRemaining: number // seconds
   totalTime: number // seconds
-  currentSession: number
-  totalSessions: number
   completedSessions: number
-  currentTask?: string // task ID
 }
 
-export interface SessionRecord {
-  id: string
-  taskId?: string
-  projectId?: string
-  startTime: Date
-  endTime?: Date
-  duration: number // seconds
-  mode: TimerMode
-  completed: boolean
-  interrupted: boolean
-  createdAt: Date
-}
-
-export interface NotificationAction {
-  action: string
-  title: string
-  icon?: string
-}
-
-export interface TimerNotification {
-  title: string
-  body: string
-  icon?: string
-  sound?: string
-  actions?: NotificationAction[]
-}
-
-export interface TimerStats {
-  totalFocusTime: number // seconds
-  totalBreakTime: number // seconds
-  sessionsCompleted: number
-  sessionsStarted: number
-  averageSessionLength: number // seconds
-  longestStreak: number
-  currentStreak: number
-  productivity: number // 0-100 score
+export interface DailyStats {
+  date: string // YYYY-MM-DD, local time
+  pomodoros: number
+  focusMinutes: number
 }
 
 export const DEFAULT_TIMER_CONFIG: TimerConfig = {
   focusTime: 25,
-  longFocusTime: 45,
+  longFocusTime: 50,
   shortBreakTime: 5,
   longBreakTime: 15,
   sessionsUntilLongBreak: 4,
-  autoStartBreaks: false,
-  autoStartPomodoros: false,
+  autoStart: false,
+  sound: true,
 }
 
-export const TIMER_SOUNDS = {
-  tick: '/sounds/tick.mp3',
-  complete: '/sounds/complete.mp3',
-  break: '/sounds/break.mp3',
-  warning: '/sounds/warning.mp3',
-} as const
+export const MODE_LABELS: Record<TimerMode, string> = {
+  focus: 'Pomodoro',
+  longFocus: 'Deep focus',
+  shortBreak: 'Short break',
+  longBreak: 'Long break',
+}
 
-export type TimerSound = keyof typeof TIMER_SOUNDS
+export const isFocusMode = (mode: TimerMode) => mode === 'focus' || mode === 'longFocus'
