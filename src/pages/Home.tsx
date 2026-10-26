@@ -26,8 +26,12 @@ const AppGrid = styled.div`
     'intro timer'
     'side timer';
   grid-template-rows: auto 1fr;
-  gap: 24px 32px;
+  gap: 28px 56px;
   align-items: start;
+
+  @media (max-width: 1100px) {
+    column-gap: 36px;
+  }
 
   @media (max-width: 960px) {
     grid-template-columns: minmax(0, 1fr);
@@ -67,9 +71,11 @@ const Intro = styled.div`
 const TimerArea = styled.div`
   grid-area: timer;
 
+  /* On desktop the timer window stretches to the full height of the left column */
   @media (min-width: 961px) {
-    position: sticky;
-    top: calc(${({ theme }) => theme.layout.headerHeight} + 20px);
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
   }
 `
 

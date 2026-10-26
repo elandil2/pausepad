@@ -26,6 +26,10 @@ const Body = styled.div`
   gap: 26px;
   padding: 26px 24px 22px;
 
+  @media (min-width: 1200px) {
+    gap: 32px;
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     gap: 20px;
     padding: 20px 14px 16px;
@@ -114,6 +118,10 @@ const Time = styled.div`
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
   color: ${({ theme }) => theme.colors.ink};
+
+  @media (min-width: 1200px) {
+    font-size: 9rem;
+  }
 `
 
 const Status = styled.p`
@@ -308,6 +316,26 @@ const Settings = styled.form`
 
 const Root = styled.div<{ $color: string }>`
   --mode: ${({ $color }) => $color};
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  /* Fill the available height; centre the timer vertically only on tall screens so the
+     controls never drop below the fold on a laptop */
+  > section {
+    flex: 1;
+  }
+
+  > section > div:last-child {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-height: 1000px) {
+    > section > div:last-child {
+      justify-content: center;
+    }
+  }
 `
 
 const durationFields: { key: keyof TimerConfig; label: string; max: number }[] = [
