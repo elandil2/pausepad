@@ -3,6 +3,7 @@
 Run once (python scripts/generate-assets.py) when the brand changes; outputs are committed.
 Requires Pillow. Uses Segoe UI on Windows, falls back to DejaVu Sans elsewhere.
 """
+import random
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -85,9 +86,20 @@ icon(64, 0.04, True).save(PUBLIC / 'favicon.ico', sizes=[(16, 16), (32, 32), (48
 
 # ---------- Open Graph image, 1200x630 ----------
 W, H = 1200, 630
-og = Image.new('RGBA', (W, H), PURPLE)
-dots(og, 26, 2)
+NIGHT_TOP, NIGHT_BOTTOM = (27, 19, 82), (77, 63, 207)
+og = Image.new('RGBA', (W, H))
 d = ImageDraw.Draw(og)
+for y in range(H):
+    t = y / (H - 1)
+    d.line([(0, y), (W, y)], fill=tuple(round(a + (b - a) * t) for a, b in zip(NIGHT_TOP, NIGHT_BOTTOM)))
+random.seed(7)
+for _ in range(70):
+    x, y, r = random.uniform(0, W), random.uniform(0, H), random.uniform(1.2, 2.8)
+    d.ellipse([x - r, y - r, x + r, y + r], fill=(255, 255, 255, random.randint(150, 255)))
+for x, y, s in [(560, 70, 18), (600, 520, 14), (40, 590, 16), (1170, 600, 12)]:
+    d.polygon([(x, y - s), (x + s * 0.3, y - s * 0.3), (x + s, y), (x + s * 0.3, y + s * 0.3),
+               (x, y + s), (x - s * 0.3, y + s * 0.3), (x - s, y), (x - s * 0.3, y - s * 0.3)],
+              fill=YELLOW, outline=INK)
 
 # Left: brand + headline
 draw_mark(d, 100, 112, 34, outline=4)

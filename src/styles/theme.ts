@@ -8,6 +8,15 @@ export const theme = {
       primary: '#6b5bf0',
       deep: '#5546d6',
     },
+    // Night sky canvas behind the cards (see Backdrop)
+    night: {
+      top: '#1b1352',
+      mid: '#30258f',
+      bottom: '#4d3fcf',
+      header: '#1b1352',
+      panel: '#251a6a',
+      footer: '#140d40',
+    },
     // Text that sits directly on the purple canvas
     onBg: {
       primary: '#ffffff',

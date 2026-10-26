@@ -7,7 +7,7 @@ const Bar = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: ${({ theme }) => theme.colors.bg.primary};
+  background: ${({ theme }) => theme.colors.night.header};
   border-bottom: ${({ theme }) => theme.border};
 `
 
@@ -107,7 +107,7 @@ const MobilePanel = styled.nav`
     gap: 6px;
     padding: 12px 16px 18px;
     border-top: ${({ theme }) => theme.border};
-    background: ${({ theme }) => theme.colors.bg.deep};
+    background: ${({ theme }) => theme.colors.night.panel};
 
     ${Item} {
       padding: 12px 16px;

@@ -1,6 +1,6 @@
 :root {
   color-scheme: light;
-  --bg: #6b5bf0;
+  --bg: #1b1352;
   --ink: #16132b;
   --accent: #ffcf33;
 }
@@ -26,8 +26,6 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   background-color: var(--bg);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1.5px, transparent 1.5px);
-  background-size: 22px 22px;
   color: #fff;
   font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   font-size: 1rem;

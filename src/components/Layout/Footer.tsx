@@ -8,7 +8,7 @@ import Logo from './Logo'
 const Wrapper = styled.footer`
   margin-top: auto;
   border-top: ${({ theme }) => theme.border};
-  background: ${({ theme }) => theme.colors.bg.deep};
+  background: ${({ theme }) => theme.colors.night.footer};
   color: ${({ theme }) => theme.colors.onBg.primary};
 `
 

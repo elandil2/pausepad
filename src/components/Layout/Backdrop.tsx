@@ -1,28 +1,38 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { theme } from '../../styles/theme'
 
-// Decorative sticker-style scenery behind the page: sun, clouds, sparkles, a planet and hills.
-// Purely visual, so it is hidden from assistive tech and ignores pointer events.
+// Decorative night sky behind the page: gradient sky, sleepy moon, twinkling stars, a shooting star,
+// sleepy clouds, a planet and hill silhouettes. Purely visual, so it is hidden from assistive tech.
 
-const INK = '#16132b'
+const INK = theme.colors.ink
+const { night } = theme.colors
 
-const spin = keyframes`
-  to { transform: rotate(360deg); }
+const twinkle = keyframes`
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(0.6); }
+`
+
+const sparkle = keyframes`
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(0.7) rotate(25deg); }
 `
 
 const drift = keyframes`
   from { transform: translateX(0); }
-  to { transform: translateX(26px); }
-`
-
-const twinkle = keyframes`
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(0.75) rotate(20deg); }
+  to { transform: translateX(22px); }
 `
 
 const bob = keyframes`
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-10px) rotate(4deg); }
+`
+
+const shoot = keyframes`
+  0% { opacity: 0; transform: rotate(28deg) translateX(0); }
+  3% { opacity: 1; }
+  11% { opacity: 0; transform: rotate(28deg) translateX(420px); }
+  100% { opacity: 0; transform: rotate(28deg) translateX(420px); }
 `
 
 const Layer = styled.div`
@@ -31,76 +41,88 @@ const Layer = styled.div`
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  background: linear-gradient(180deg, ${night.top} 0%, ${night.mid} 55%, ${night.bottom} 100%);
 
   > * {
     position: absolute;
   }
 `
 
-const Sun = styled.svg`
-  top: 92px;
-  right: -40px;
-  width: clamp(130px, 17vw, 250px);
+const Star = styled.span`
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px 1px rgba(255, 255, 255, 0.85);
+  animation: ${twinkle} ease-in-out infinite;
+`
 
-  .rays {
-    transform-origin: 100px 100px;
-    animation: ${spin} 80s linear infinite;
+const Sparkle = styled.svg`
+  animation: ${sparkle} 3.4s ease-in-out infinite;
+`
+
+const ShootingStar = styled.span`
+  top: 14vh;
+  left: 18vw;
+  width: 140px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff);
+  transform-origin: left center;
+  animation: ${shoot} 11s ease-in 2s infinite;
+  opacity: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.8);
   }
+`
 
-  /* On phones only half the sun peeks in from the edge so it never sits behind the heading */
+const Moon = styled.svg`
+  /* Sits in the gutter to the right of the timer window on wide screens */
+  top: 84px;
+  right: 1vw;
+  width: clamp(110px, 10vw, 160px);
+  animation: ${bob} 9s ease-in-out infinite;
+
   @media (max-width: 640px) {
-    top: 56px;
-    right: -42px;
-    width: 84px;
+    top: 64px;
+    right: -24px;
+    width: 74px;
   }
 `
 
 const Cloud = styled.svg<{ $delay?: string; $duration?: string }>`
-  animation: ${drift} ${({ $duration }) => $duration || '9s'} ease-in-out ${({ $delay }) => $delay || '0s'} infinite alternate;
-`
+  animation: ${drift} ${({ $duration }) => $duration || '10s'} ease-in-out ${({ $delay }) => $delay || '0s'} infinite alternate;
 
-const CloudLeft = styled(Cloud)`
-  top: 34vh;
-  left: -46px;
-  width: clamp(130px, 15vw, 230px);
-
-  @media (max-width: 640px) {
-    top: 46vh;
-    left: -54px;
-    width: 120px;
-  }
-`
-
-const CloudRight = styled(Cloud)`
-  top: 68vh;
-  right: -30px;
-  width: clamp(110px, 12vw, 190px);
-
-  @media (max-width: 640px) {
-    top: 78vh;
-    width: 96px;
-  }
-`
-
-const CloudSmall = styled(Cloud)`
-  top: 14vh;
-  left: 30vw;
-  width: clamp(70px, 7vw, 110px);
-
+  /* On phones the content fills the width, so clouds would only show as cut-off blobs */
   @media (max-width: 960px) {
     display: none;
   }
 `
 
-const Sparkle = styled.svg<{ $delay: string }>`
-  animation: ${twinkle} 3.2s ease-in-out ${({ $delay }) => $delay} infinite;
+const CloudLeft = styled(Cloud)`
+  top: 40vh;
+  left: -24px;
+  width: clamp(130px, 13vw, 210px);
+`
+
+const CloudRight = styled(Cloud)`
+  top: 66vh;
+  right: 1vw;
+  width: clamp(110px, 11vw, 180px);
 `
 
 const Planet = styled.svg`
-  top: 58vh;
-  left: 3vw;
-  width: clamp(70px, 7vw, 110px);
-  animation: ${bob} 6s ease-in-out infinite;
+  top: 64vh;
+  left: 4vw;
+  width: clamp(70px, 6vw, 100px);
+  animation: ${bob} 7s ease-in-out infinite;
 
   @media (max-width: 960px) {
     display: none;
@@ -111,79 +133,99 @@ const Hills = styled.svg`
   bottom: -2px;
   left: 0;
   width: 100%;
-  height: clamp(80px, 14vh, 160px);
+  height: clamp(70px, 12vh, 140px);
 `
 
-const CloudShape: React.FC = () => (
+// Deterministic pseudo-random star field so server and client render the same sky.
+const rand = (() => {
+  let seed = 42
+  return () => {
+    seed = (seed * 16807) % 2147483647
+    return (seed - 1) / 2147483646
+  }
+})()
+
+const stars = Array.from({ length: 90 }, () => ({
+  top: `${(rand() * 88).toFixed(2)}%`,
+  left: `${(rand() * 100).toFixed(2)}%`,
+  size: 2 + rand() * 3,
+  duration: `${(2.5 + rand() * 3.5).toFixed(2)}s`,
+  delay: `${(-rand() * 5).toFixed(2)}s`,
+}))
+
+const sparkles = [
+  { top: '16vh', left: '5vw', size: 42, color: '#ffcf33', delay: '0s' },
+  { top: '30vh', right: '16vw', size: 30, color: '#ffffff', delay: '0.7s' },
+  { top: '52vh', right: '4vw', size: 36, color: '#ffcf33', delay: '1.4s' },
+  { top: '78vh', left: '10vw', size: 34, color: '#ffffff', delay: '2.1s' },
+  { top: '8vh', left: '44vw', size: 22, color: '#ffffff', delay: '1s' },
+  { top: '86vh', right: '24vw', size: 26, color: '#ffcf33', delay: '2.6s' },
+  { top: '24vh', left: '24vw', size: 18, color: '#ffcf33', delay: '0.4s' },
+]
+
+const SleepyCloud: React.FC = () => (
   <>
     <path
-      d="M38 92c-16 0-28-11-28-25 0-13 11-24 25-24 3-17 18-29 36-29 16 0 30 10 35 24 3-1 6-1 9-1 18 0 32 13 32 29 0 1 0 2 0 3 9 3 15 10 15 19 0 12-11 22-25 22H38z"
-      fill="#ffffff"
+      d="M38 84c-16 0-28-11-28-25 0-13 11-24 25-24 3-17 18-29 36-29 16 0 30 10 35 24 3-1 6-1 9-1 18 0 32 13 32 29v3c9 3 15 10 15 19 0 12-11 22-25 22H38z"
+      fill="#cbc2ff"
       stroke={INK}
       strokeWidth="5"
       strokeLinejoin="round"
-      transform="translate(0 -8)"
     />
-    <path d="M52 70c4 5 12 5 16 0" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" />
-    <circle cx="48" cy="58" r="3.5" fill={INK} />
-    <circle cx="72" cy="58" r="3.5" fill={INK} />
+    <path d="M42 56q6 5 12 0M68 56q6 5 12 0" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+    <path d="M54 68q6 4 12 0" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" />
   </>
 )
 
-const SparkleShape: React.FC<{ color: string }> = ({ color }) => (
-  <path
-    d="M20 2c1.6 9 4 11.4 13 13-9 1.6-11.4 4-13 13-1.6-9-4-11.4-13-13 9-1.6 11.4-4 13-13z"
-    fill={color}
-    stroke={INK}
-    strokeWidth="2.6"
-    strokeLinejoin="round"
-  />
-)
-
-const sparkles = [
-  { top: '18vh', left: '6vw', size: 34, color: '#ffcf33', delay: '0s' },
-  { top: '46vh', right: '5vw', size: 26, color: '#ffffff', delay: '0.8s' },
-  { top: '80vh', left: '12vw', size: 30, color: '#ffffff', delay: '1.6s' },
-  { top: '9vh', left: '48vw', size: 22, color: '#ffcf33', delay: '2.2s' },
-  { top: '88vh', right: '22vw', size: 24, color: '#ffcf33', delay: '1.1s' },
-]
-
 const Backdrop: React.FC = () => (
   <Layer aria-hidden="true">
-    <Sun viewBox="0 0 200 200">
-      <g className="rays">
-        {Array.from({ length: 12 }, (_, i) => (
-          <rect
-            key={i}
-            x="92"
-            y="4"
-            width="16"
-            height="34"
-            rx="8"
-            fill="#ffcf33"
-            stroke={INK}
-            strokeWidth="4"
-            transform={`rotate(${i * 30} 100 100)`}
-          />
-        ))}
-      </g>
-      <circle cx="100" cy="100" r="56" fill="#ffcf33" stroke={INK} strokeWidth="5" />
-      <circle cx="78" cy="112" r="9" fill="#ff9f9f" opacity="0.8" />
-      <circle cx="122" cy="112" r="9" fill="#ff9f9f" opacity="0.8" />
-      <ellipse cx="84" cy="94" rx="5" ry="7" fill={INK} />
-      <ellipse cx="116" cy="94" rx="5" ry="7" fill={INK} />
-      <path d="M86 116c8 10 20 10 28 0" fill="none" stroke={INK} strokeWidth="5" strokeLinecap="round" />
-    </Sun>
+    {stars.map((s, i) => (
+      <Star
+        key={i}
+        style={{ top: s.top, left: s.left, width: s.size, height: s.size, animationDuration: s.duration, animationDelay: s.delay }}
+      />
+    ))}
 
-    <CloudLeft viewBox="0 0 170 100">
-      <CloudShape />
+    <ShootingStar />
+
+    {sparkles.map(({ size, color, delay, ...pos }, i) => (
+      <Sparkle key={i} viewBox="0 0 40 40" width={size} height={size} style={{ ...pos, animationDelay: delay }}>
+        <path
+          d="M20 2c1.8 10.5 5.5 14.2 16 16-10.5 1.8-14.2 5.5-16 16-1.8-10.5-5.5-14.2-16-16 10.5-1.8 14.2-5.5 16-16z"
+          fill={color}
+          stroke={INK}
+          strokeWidth="2.6"
+          strokeLinejoin="round"
+        />
+      </Sparkle>
+    ))}
+
+    <Moon viewBox="0 0 200 180">
+      <path
+        d="M102.8 40.1A60 60 0 1 0 154.2 125.8A50 50 0 0 1 102.8 40.1Z"
+        fill="#ffe27a"
+        stroke={INK}
+        strokeWidth="5"
+        strokeLinejoin="round"
+      />
+      <circle cx="60" cy="112" r="6" fill="#ffb3b3" opacity="0.85" />
+      <path d="M53 94q7 6 14 0" fill="none" stroke={INK} strokeWidth="4.5" strokeLinecap="round" />
+      <path d="M62 124q6 4 12 -1" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      {/* Sleepy "z z", drawn as strokes so they don't depend on a font */}
+      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M140 22h16l-16 18h16" stroke={INK} strokeWidth="9" />
+        <path d="M140 22h16l-16 18h16" stroke="#fff" strokeWidth="4" />
+        <path d="M166 4h11l-11 12h11" stroke={INK} strokeWidth="8" />
+        <path d="M166 4h11l-11 12h11" stroke="#fff" strokeWidth="3.5" />
+      </g>
+    </Moon>
+
+    <CloudLeft viewBox="0 0 170 92">
+      <SleepyCloud />
     </CloudLeft>
-    <CloudRight viewBox="0 0 170 100" $delay="-4s" $duration="11s">
-      <CloudShape />
+    <CloudRight viewBox="0 0 170 92" $delay="-5s" $duration="12s">
+      <SleepyCloud />
     </CloudRight>
-    <CloudSmall viewBox="0 0 170 100" $delay="-2s" $duration="13s">
-      <CloudShape />
-    </CloudSmall>
 
     <Planet viewBox="0 0 120 100">
       <ellipse cx="60" cy="54" rx="56" ry="15" fill="none" stroke={INK} strokeWidth="5" />
@@ -192,23 +234,17 @@ const Backdrop: React.FC = () => (
       <path d="M8 56c10 10 94 10 104-2" fill="none" stroke={INK} strokeWidth="5" strokeLinecap="round" />
     </Planet>
 
-    {sparkles.map(({ size, color, delay, ...pos }, i) => (
-      <Sparkle key={i} viewBox="0 0 40 30" width={size} height={size} $delay={delay} style={pos}>
-        <SparkleShape color={color} />
-      </Sparkle>
-    ))}
-
     <Hills viewBox="0 0 1440 160" preserveAspectRatio="none">
       <path
         d="M0 90C160 40 300 40 470 80s300 60 470 10 320-70 500-20v100H0z"
-        fill="#8577f7"
+        fill="#2c2186"
         stroke={INK}
         strokeWidth="4"
         vectorEffect="non-scaling-stroke"
       />
       <path
         d="M0 130c180-50 380-60 560-20s340 40 520 0 280-40 360-20v90H0z"
-        fill="#5546d6"
+        fill="#1d1562"
         stroke={INK}
         strokeWidth="4"
         vectorEffect="non-scaling-stroke"
